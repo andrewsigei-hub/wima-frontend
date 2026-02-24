@@ -1,0 +1,102 @@
+const Contact = () => {
+  const contactMethods = [
+    { icon: 'phone', label: 'Call Us', values: ['+254 700 000 000', '+254 711 000 000'] },
+    { icon: 'chat', label: 'WhatsApp', values: ['Chat on WhatsApp'], link: 'https://wa.me/254700000000' },
+    { icon: 'mail', label: 'Email Us', values: ['info@wimaserenity.com', 'bookings@wimaserenity.com'] },
+    { icon: 'schedule', label: 'Business Hours', values: ['Mon - Sun: 7:00 AM - 9:00 PM'], note: 'Guest check-in: 24/7' },
+  ]
+
+  return (
+    <section id="contact" className="py-20 md:py-28 bg-accent/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          {/* Contact Form */}
+          <div className="lg:col-span-7">
+            <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-primary/5 border border-primary/5">
+              <h2 className="font-display text-2xl font-bold text-primary mb-8">Send us a Message</h2>
+              <form className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">First Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="John" 
+                      className="w-full rounded-lg border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary transition-all px-4 py-3"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-2">Last Name</label>
+                    <input 
+                      type="text" 
+                      placeholder="Doe" 
+                      className="w-full rounded-lg border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary transition-all px-4 py-3"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    placeholder="john@example.com" 
+                    className="w-full rounded-lg border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary transition-all px-4 py-3"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Inquiry Type</label>
+                  <select className="w-full rounded-lg border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary transition-all px-4 py-3">
+                    <option>Room Booking</option>
+                    <option>Event Inquiry</option>
+                    <option>Corporate Event</option>
+                    <option>General Feedback</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-2">Your Message</label>
+                  <textarea 
+                    rows="4" 
+                    placeholder="Tell us about your plans..." 
+                    className="w-full rounded-lg border-slate-200 bg-slate-50 focus:ring-primary focus:border-primary transition-all px-4 py-3"
+                  ></textarea>
+                </div>
+                <button 
+                  type="submit" 
+                  className="w-full bg-primary text-secondary py-4 rounded-lg font-bold hover:bg-primary-light transform active:scale-[0.98] transition-all flex justify-center items-center gap-2"
+                >
+                  <span className="material-symbols-outlined">send</span>
+                  Send Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div className="lg:col-span-5 space-y-6">
+            {contactMethods.map((method, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl border border-primary/5">
+                <div className="flex items-center gap-4 mb-4">
+                  <span className="material-symbols-outlined text-primary bg-accent p-3 rounded-lg">{method.icon}</span>
+                  <h3 className="font-bold text-lg text-primary">{method.label}</h3>
+                </div>
+                {method.values.map((value, i) => (
+                  method.link ? (
+                    <a key={i} href={method.link} className="text-primary font-bold hover:underline flex items-center gap-1">
+                      {value}
+                      <span className="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
+                  ) : (
+                    <p key={i} className="text-slate-600 font-medium">{value}</p>
+                  )
+                ))}
+                {method.note && (
+                  <p className="text-xs text-slate-500 italic mt-2 bg-accent/50 px-3 py-1 rounded-full inline-block">{method.note}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default Contact
