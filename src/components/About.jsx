@@ -14,14 +14,14 @@ const About = () => {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img 
-                src="/images/pathway.jpeg" 
+                src="/images/balcony_pathway.webp" 
                 alt="Stone pathway through gardens" 
                 className="w-full aspect-[3/4] object-cover"
               />
             </div>
             <div className="absolute -bottom-8 right-0 w-2/3 rounded-2xl overflow-hidden shadow-xl border-4 border-secondary">
               <img 
-                src="/images/garden-lawn.jpeg" 
+                src="/images/right-side_garden_from_bottom.webp" 
                 alt="Lush garden lawn" 
                 className="w-full aspect-[4/3] object-cover"
               />

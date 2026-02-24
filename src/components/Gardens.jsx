@@ -25,7 +25,7 @@ const Gardens = () => {
           {/* Large image */}
           <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/flowers-1.jpeg" 
+              src="/images/full_garden_pic.webp" 
               alt="Colorful flower beds" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
@@ -34,28 +34,28 @@ const Gardens = () => {
           {/* Smaller images */}
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/flowers-2.jpeg" 
+              src="/images/front_right_garden.webp" 
               alt="Garden landscaping" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/pathway.jpeg" 
+              src="/images/balcony_pathway.webp" 
               alt="Stone pathway" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/garden-lawn.jpeg" 
+              src="/images/right-side_garden_from_bottom.webp" 
               alt="Manicured lawns" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/garden-grounds.jpeg" 
+              src="/images/golden_hour_garden.jpeg" 
               alt="Garden grounds" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />

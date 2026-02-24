@@ -4,7 +4,7 @@ const Hero = () => {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/aerial-top.png" 
+          src="/images/large_aerial_view.PNG" 
           alt="Aerial view of Wima Serenity Gardens" 
           className="w-full h-full object-cover"
         />
@@ -64,11 +64,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Image Card */}
+            {/* Hero Image Card */}
           <div className="relative hidden lg:block">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20">
               <img 
-                src="/images/outdoor-dining.jpeg" 
+                src="/images/house_picture_from_garden.png" 
                 alt="Outdoor dining at Wima Serenity Gardens" 
                 className="w-full aspect-[4/3] object-cover"
               />

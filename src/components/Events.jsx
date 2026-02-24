@@ -3,7 +3,7 @@ const Events = () => {
     {
       name: 'Main Event Field',
       description: 'Our larger venue with expansive lawns, perfect for weddings and large celebrations. Accommodates up to 500 guests.',
-      image: '/images/aerial-event.png',
+      image: '/images/large_aerial_view.PNG',
       tag: 'Popular',
       tagColor: 'bg-gold text-white',
       capacity: 'Up to 500 guests',
@@ -13,7 +13,7 @@ const Events = () => {
     {
       name: 'Garden Terrace',
       description: 'A more intimate setting surrounded by our beautiful gardens. Ideal for corporate events and smaller gatherings.',
-      image: '/images/ground-event.png',
+      image: '/images/house_pic_from_out_with_table.jpeg',
       tag: 'Intimate',
       tagColor: 'bg-cream text-primary',
       capacity: 'Up to 200 guests',
