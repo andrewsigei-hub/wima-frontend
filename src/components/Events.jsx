@@ -1,4 +1,180 @@
+import { useState } from 'react'
+import api from '../lib/api'
+
+const inputClass =
+  'w-full rounded-lg border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all px-4 py-3 text-slate-800'
+
+const today = new Date().toISOString().split('T')[0]
+
+// ─── Event Inquiry Modal ──────────────────────────────────────────────────────
+
+function EventInquiryModal({ venuePreference, onClose }) {
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    event_type: 'wedding',
+    event_date: '',
+    guest_count: '',
+    venue_preference: venuePreference || '',
+    message: '',
+  })
+  const [status, setStatus] = useState('idle') // idle | loading | success | error
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setStatus('loading')
+    setErrorMsg('')
+
+    try {
+      await api.post('/inquiries/event', {
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        event_type: form.event_type,
+        event_date: form.event_date,
+        guest_count: parseInt(form.guest_count, 10),
+        venue_preference: form.venue_preference || undefined,
+        message: form.message,
+      })
+      setStatus('success')
+    } catch (err) {
+      setStatus('error')
+      setErrorMsg(err.message || 'Something went wrong. Please try again.')
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h3 className="font-display text-xl font-bold text-primary">Event Inquiry</h3>
+            <p className="text-sm text-slate-500 mt-0.5">Tell us about your event and we&apos;ll be in touch</p>
+          </div>
+          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        {status === 'success' ? (
+          <div className="text-center py-8">
+            <span className="material-symbols-outlined text-5xl text-green-500 mb-4 block">check_circle</span>
+            <p className="text-lg font-semibold text-primary mb-2">Inquiry sent!</p>
+            <p className="text-slate-600 mb-6">We&apos;ll be in touch to discuss your event shortly.</p>
+            <button onClick={onClose} className="text-primary font-semibold underline underline-offset-2">
+              Close
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Contact details */}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+              <input name="name" value={form.name} onChange={handleChange} required placeholder="Jane Smith" className={inputClass} />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="jane@example.com" className={inputClass} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Phone *</label>
+                <input name="phone" type="tel" value={form.phone} onChange={handleChange} required placeholder="+254700000000" className={inputClass} />
+              </div>
+            </div>
+
+            {/* Event details */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Event Type *</label>
+                <select name="event_type" value={form.event_type} onChange={handleChange} required className={inputClass}>
+                  <option value="wedding">Wedding</option>
+                  <option value="corporate">Corporate</option>
+                  <option value="birthday">Birthday</option>
+                  <option value="reunion">Reunion</option>
+                  <option value="graduation">Graduation</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Event Date *</label>
+                <input name="event_date" type="date" value={form.event_date} onChange={handleChange} required min={today} className={inputClass} />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Guest Count *</label>
+                <input name="guest_count" type="number" min="1" max="500" value={form.guest_count} onChange={handleChange} required placeholder="e.g. 150" className={inputClass} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Venue Preference</label>
+                <select name="venue_preference" value={form.venue_preference} onChange={handleChange} className={inputClass}>
+                  <option value="">No preference</option>
+                  <option value="field_1">Main Event Field</option>
+                  <option value="field_2">Garden Terrace</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Message *</label>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                minLength={10}
+                rows="3"
+                placeholder="Tell us more about your event — theme, catering needs, setup requirements…"
+                className={inputClass}
+              />
+            </div>
+
+            {status === 'error' && (
+              <p className="text-red-600 text-sm bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                {errorMsg}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="w-full bg-primary text-secondary py-3 rounded-lg font-bold hover:bg-primary-light transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              {status === 'loading' ? (
+                <>
+                  <span className="material-symbols-outlined animate-spin text-base">progress_activity</span>
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <span className="material-symbols-outlined text-base">send</span>
+                  Submit Inquiry
+                </>
+              )}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ─── Main Component ───────────────────────────────────────────────────────────
+
 const Events = () => {
+  const [eventModal, setEventModal] = useState(null) // null | venuePreference string
+
   const venues = [
     {
       name: 'Main Event Field',
@@ -9,6 +185,7 @@ const Events = () => {
       capacity: 'Up to 500 guests',
       feature: 'Tent setup',
       featureIcon: 'tent',
+      venuePreference: 'field_1',
     },
     {
       name: 'Garden Terrace',
@@ -19,15 +196,16 @@ const Events = () => {
       capacity: 'Up to 200 guests',
       feature: 'Garden views',
       featureIcon: 'local_florist',
+      venuePreference: 'field_2',
     },
   ]
 
   const eventTypes = [
-    { icon: 'church', label: 'Weddings' },
-    { icon: 'cake', label: 'Birthdays' },
-    { icon: 'business_center', label: 'Corporate' },
-    { icon: 'groups', label: 'Reunions' },
-    { icon: 'school', label: 'Graduations' },
+    { icon: 'church',           label: 'Weddings' },
+    { icon: 'cake',             label: 'Birthdays' },
+    { icon: 'business_center',  label: 'Corporate' },
+    { icon: 'groups',           label: 'Reunions' },
+    { icon: 'school',           label: 'Graduations' },
   ]
 
   return (
@@ -71,9 +249,12 @@ const Events = () => {
                     <span className="font-display text-2xl font-semibold text-primary">KSh 50,000</span>
                     <span className="text-xs text-slate-500">/day</span>
                   </div>
-                  <a href="#contact" className="px-5 py-2 bg-primary text-secondary rounded-lg text-sm font-semibold hover:bg-primary-light transition-all">
+                  <button
+                    onClick={() => setEventModal(venue.venuePreference)}
+                    className="px-5 py-2 bg-primary text-secondary rounded-lg text-sm font-semibold hover:bg-primary-light transition-all"
+                  >
                     Inquire
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
@@ -92,6 +273,14 @@ const Events = () => {
           </div>
         </div>
       </div>
+
+      {/* Event inquiry modal */}
+      {eventModal !== null && (
+        <EventInquiryModal
+          venuePreference={eventModal}
+          onClose={() => setEventModal(null)}
+        />
+      )}
     </section>
   )
 }
