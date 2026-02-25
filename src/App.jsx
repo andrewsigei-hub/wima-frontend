@@ -5,7 +5,9 @@ import About from './components/About'
 import Rooms from './components/Rooms'
 import Events from './components/Events'
 import Gardens from './components/Gardens'
+import Slideshow from './components/Slideshow'
 import Amenities from './components/Amenities'
+import Nearby from './components/Nearby'
 import Contact from './components/Contact'
 import MapSection from './components/MapSection'
 import Footer from './components/Footer'
@@ -20,7 +22,9 @@ function App() {
       <Rooms />
       <Events />
       <Gardens />
+      <Slideshow />
       <Amenities />
+      <Nearby />
       <Contact />
       <MapSection />
       <Footer />

@@ -1,3 +1,24 @@
+const pkg = {
+  tagline: 'One estate. All yours.',
+  price: '40,000',
+  originalPrice: '42,500',
+  savings: '2,500',
+  capacity: 20,
+  rooms: [
+    '3x Standard Double Rooms',
+    '2x Premier Rooms',
+    '1x Garden Cottage',
+    '1x Family Room',
+  ],
+  benefits: [
+    'Complete privacy — no other guests',
+    'Breakfast for every guest, every morning',
+    'Full garden & grounds access',
+    'Free parking included',
+    'Ideal for reunions, retreats & wedding parties',
+  ],
+}
+
 const Rooms = () => {
   const rooms = [
     {
@@ -88,6 +109,75 @@ const Rooms = () => {
               </div>
             </div>
           ))}
+
+          {/* Home Away From Home — full-width package card */}
+          <div className="md:col-span-2 lg:col-span-3 rounded-2xl overflow-hidden border border-gold/30 bg-linear-to-r from-secondary/10 to-accent/20">
+            <div className="p-8 md:p-10">
+              {/* Badges */}
+              <div className="flex flex-wrap items-center gap-3 mb-5">
+                <span className="bg-gold text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                  Best Value
+                </span>
+                <span className="text-secondary/70 text-sm">
+                  Save KSh {pkg.savings} vs. booking separately
+                </span>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-8 items-start">
+                {/* Left — name, tagline, rooms included */}
+                <div>
+                  <h3 className="font-display text-2xl md:text-3xl font-semibold text-secondary mb-1">
+                    Home Away From Home Package
+                  </h3>
+                  <p className="font-script text-2xl text-accent mb-5">{pkg.tagline}</p>
+
+                  <p className="text-sm text-secondary/70 mb-6 leading-relaxed">
+                    Reserve the entire property exclusively for your group — all 7 rooms, the gardens, and complete privacy. Perfect for family reunions, group getaways, corporate retreats, and wedding parties.
+                  </p>
+
+                  <p className="text-xs text-accent/80 uppercase tracking-widest font-semibold mb-3">What&apos;s included</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {pkg.rooms.map((r, i) => (
+                      <div key={i} className="flex items-center gap-2 text-sm text-secondary/80">
+                        <span className="material-symbols-outlined text-gold text-base">check_circle</span>
+                        {r}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right — benefits + pricing + CTA */}
+                <div>
+                  <p className="text-xs text-accent/80 uppercase tracking-widest font-semibold mb-3">Benefits</p>
+                  <ul className="space-y-2 mb-8">
+                    {pkg.benefits.map((b, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-secondary/80">
+                        <span className="material-symbols-outlined text-gold text-base mt-0.5">star</span>
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap items-end justify-between gap-4 pt-6 border-t border-white/10">
+                    <div>
+                      <div className="flex items-baseline gap-2">
+                        <span className="font-display text-3xl font-bold text-secondary">KSh {pkg.price}</span>
+                        <span className="text-sm text-secondary/50">/night</span>
+                      </div>
+                      <p className="text-sm text-secondary/40 line-through">KSh {pkg.originalPrice}</p>
+                      <p className="text-xs text-secondary/50 mt-1">Up to {pkg.capacity} guests</p>
+                    </div>
+                    <a
+                      href="#contact"
+                      className="inline-block bg-secondary text-primary px-8 py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition-all text-sm"
+                    >
+                      Book Entire Property
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
