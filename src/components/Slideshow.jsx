@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 
-const slides = [
+const SLIDES = [
   { src: '/images/large_aerial_view.PNG',              alt: 'Aerial view of Wima Serenity Gardens' },
   { src: '/images/house_picture_from_garden.png',      alt: 'Main house viewed from the gardens' },
   { src: '/images/full_garden_pic.webp',               alt: 'Lush flower gardens in full bloom' },
@@ -11,18 +11,58 @@ const slides = [
   { src: '/images/house_pic_from_out_with_table.jpeg', alt: 'Outdoor dining on the grounds' },
 ]
 
+// Wrap first/last slides as clones to enable seamless infinite looping.
+// Layout: [clone-of-last, ...SLIDES, clone-of-first]
+// Real slides sit at positions 1 → SLIDES.length.
+const EXT = [SLIDES[SLIDES.length - 1], ...SLIDES, SLIDES[0]]
+
 const Slideshow = () => {
-  const [current, setCurrent] = useState(0)
-  const [paused, setPaused] = useState(false)
+  // index into EXT; start at 1 (first real slide)
+  const [index, setIndex]       = useState(1)
+  const [animated, setAnimated] = useState(true)
+  const [paused, setPaused]     = useState(false)
 
-  const next = useCallback(() => setCurrent(i => (i + 1) % slides.length), [])
-  const prev = useCallback(() => setCurrent(i => (i - 1 + slides.length) % slides.length), [])
+  // Dot / thumbnail index (0-based into SLIDES)
+  const realIndex = ((index - 1) % SLIDES.length + SLIDES.length) % SLIDES.length
 
+  const goNext = useCallback(() => {
+    setAnimated(true)
+    setIndex(i => i + 1)
+  }, [])
+
+  const goPrev = useCallback(() => {
+    setAnimated(true)
+    setIndex(i => i - 1)
+  }, [])
+
+  const goTo = (ri) => {
+    setAnimated(true)
+    setIndex(ri + 1)
+  }
+
+  // After a clone slide finishes transitioning, silently teleport to the real slide.
+  useEffect(() => {
+    if (index !== 0 && index !== EXT.length - 1) return
+
+    const teleportTo = index === 0 ? SLIDES.length : 1
+
+    const id = setTimeout(() => {
+      // Disable transition → instant position change (same visual)
+      setAnimated(false)
+      setIndex(teleportTo)
+      // Re-enable transition after the browser has painted the new position
+      requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
+    }, 700)
+
+    return () => clearTimeout(id)
+  }, [index])
+
+  // Auto-advance every 4.5 s; pause on hover
   useEffect(() => {
     if (paused) return
-    const id = setInterval(next, 4500)
+    const id = setInterval(goNext, 4500)
     return () => clearInterval(id)
-  }, [paused, next])
+  }, [paused, goNext])
 
   return (
     <section id="slideshow" className="py-20 md:py-28 bg-secondary">
@@ -35,36 +75,47 @@ const Slideshow = () => {
           </h2>
         </div>
 
-        {/* Slideshow */}
+        {/* Carousel */}
         <div
           className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/10 aspect-[16/9]"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          {slides.map((slide, i) => (
-            <img
-              key={i}
-              src={slide.src}
-              alt={slide.alt}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${i === current ? 'opacity-100' : 'opacity-0'}`}
-            />
-          ))}
+          {/* Sliding strip */}
+          <div
+            className="flex h-full"
+            style={{
+              width: `${EXT.length * 100}%`,
+              transform: `translateX(-${(index / EXT.length) * 100}%)`,
+              transition: animated ? 'transform 700ms ease-in-out' : 'none',
+            }}
+          >
+            {EXT.map((slide, i) => (
+              <div
+                key={i}
+                style={{ width: `${100 / EXT.length}%` }}
+                className="flex-shrink-0 h-full"
+              >
+                <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
 
           {/* Caption */}
-          <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/60 to-transparent px-6 py-5 pointer-events-none">
-            <p className="text-secondary/90 text-sm font-medium">{slides[current].alt}</p>
+          <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-primary/60 to-transparent px-6 py-5 pointer-events-none">
+            <p className="text-secondary/90 text-sm font-medium">{SLIDES[realIndex].alt}</p>
           </div>
 
           {/* Prev / Next */}
           <button
-            onClick={prev}
+            onClick={goPrev}
             aria-label="Previous image"
             className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110"
           >
             <span className="material-symbols-outlined">chevron_left</span>
           </button>
           <button
-            onClick={next}
+            onClick={goNext}
             aria-label="Next image"
             className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110"
           >
@@ -76,24 +127,24 @@ const Slideshow = () => {
         <div className="mt-6 flex flex-col items-center gap-4">
           {/* Dots */}
           <div className="flex gap-2">
-            {slides.map((_, i) => (
+            {SLIDES.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`rounded-full transition-all ${i === current ? 'w-6 h-2 bg-primary' : 'w-2 h-2 bg-primary/30 hover:bg-primary/60'}`}
+                className={`rounded-full transition-all ${i === realIndex ? 'w-6 h-2 bg-primary' : 'w-2 h-2 bg-primary/30 hover:bg-primary/60'}`}
               />
             ))}
           </div>
 
           {/* Thumbnail strip */}
           <div className="flex gap-2 overflow-x-auto pb-1 max-w-full">
-            {slides.map((slide, i) => (
+            {SLIDES.map((slide, i) => (
               <button
                 key={i}
-                onClick={() => setCurrent(i)}
+                onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all ${i === current ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
+                className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all ${i === realIndex ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
               >
                 <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
               </button>
