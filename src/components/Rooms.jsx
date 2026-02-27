@@ -318,7 +318,7 @@ const Rooms = () => {
                       type="button"
                       aria-label={`Book ${room.name}`}
                       onClick={() => openRoomBooking(room)}
-                      className="px-5 py-2 border border-heritage-gold-soft text-heritage-gold-soft rounded-lg text-sm font-semibold hover:bg-[#f2ecda] hover:text-botanical hover:border-[#f2ecda] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                      className="px-5 py-2 bg-botanical text-secondary rounded-lg text-sm font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book
                     </button>
@@ -396,7 +396,7 @@ const Rooms = () => {
                     <button
                       type="button"
                       onClick={openPackageBooking}
-                      className="inline-block bg-[#f2ecda] text-botanical px-8 py-3 rounded-lg font-bold hover:bg-heritage-gold-soft hover:text-botanical transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                      className="inline-block bg-botanical text-secondary px-8 py-3 rounded-lg font-bold hover:bg-primary transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book Entire Property
                     </button>

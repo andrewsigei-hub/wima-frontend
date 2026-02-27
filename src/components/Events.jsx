@@ -221,6 +221,21 @@ const Events = () => {
           <p className="text-slate-600 max-w-2xl mx-auto">
             Our expansive grounds feature two beautiful event spaces perfect for weddings, corporate gatherings, birthday celebrations, and family reunions.
           </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <a
+              href="#gardens"
+              className="px-6 py-3 rounded-lg border border-botanical/60 text-botanical font-semibold hover:bg-botanical/5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+            >
+              Explore Venues
+            </a>
+            <button
+              type="button"
+              onClick={() => setEventModal('')}
+              className="px-6 py-3 rounded-lg bg-botanical text-secondary font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+            >
+              Inquire Now
+            </button>
+          </div>
         </div>
 
         {/* Two Venue Cards */}

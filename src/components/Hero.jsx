@@ -42,7 +42,7 @@ const Hero = () => {
             </a>
             <a
               href="#events"
-              className="w-full sm:w-auto bg-[#f2ecda] text-botanical border border-heritage-gold-soft px-8 py-4 rounded-lg font-semibold hover:bg-[#e9dec2] transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto bg-transparent text-botanical border border-botanical/60 px-8 py-4 rounded-lg font-semibold hover:bg-botanical/5 transition-all flex items-center justify-center gap-2"
             >
               Plan an Event
             </a>

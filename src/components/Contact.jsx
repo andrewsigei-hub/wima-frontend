@@ -54,7 +54,17 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="lg:col-span-7">
             <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-primary/5 border border-heritage-gold-soft/40">
-              <h2 className="font-display text-2xl font-bold text-botanical mb-8">Send us a Message</h2>
+              <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-display text-2xl font-bold text-botanical">Send us a Message</h2>
+                <a
+                  href="https://wa.me/254700000000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-lg border border-botanical/60 text-botanical text-sm font-semibold hover:bg-botanical/5 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                >
+                  WhatsApp Us
+                </a>
+              </div>
 
               {status === 'success' ? (
                 <div className="text-center py-10">
