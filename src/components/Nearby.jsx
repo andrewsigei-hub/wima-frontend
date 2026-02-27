@@ -46,7 +46,7 @@ const attractions = [
 
 const Nearby = () => {
   return (
-    <section id="nearby" className="py-20 md:py-28 bg-[#f3ecda]">
+    <section id="nearby" className="py-20 md:py-28 bg-green-mist/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

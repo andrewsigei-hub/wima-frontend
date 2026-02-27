@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import api from '../lib/api'
 
 // Map room type → tag label & colour (display-only)
@@ -6,6 +7,7 @@ const TAG_MAP = {
   standard: { tag: 'Value',   tagColor: 'bg-cream text-primary' },
   double:   { tag: 'Value',   tagColor: 'bg-cream text-primary' },
   premier:  { tag: 'Popular', tagColor: 'bg-gold text-white' },
+  executive:{ tag: 'Executive', tagColor: 'bg-gold text-white' },
   cottage:  { tag: 'Private', tagColor: 'bg-secondary text-primary' },
   deluxe:   { tag: 'Deluxe',  tagColor: 'bg-gold text-white' },
 }
@@ -276,10 +278,13 @@ const Rooms = () => {
             </h2>
             <p className="text-heritage-gold-soft/80 mt-2">All rooms include breakfast</p>
           </div>
-          <a href="#contact" className="mt-4 md:mt-0 inline-flex items-center gap-2 text-secondary font-semibold hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft rounded-md px-1">
+          <Link
+            to="/rooms"
+            className="mt-4 md:mt-0 inline-flex items-center gap-2 bg-[#efe6cd] text-botanical border border-heritage-gold-soft px-5 py-2.5 rounded-lg font-semibold hover:bg-[#e6d8b2] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+          >
             View All Rooms
             <span className="material-symbols-outlined">arrow_forward</span>
-          </a>
+          </Link>
         </div>
 
         {/* Room Cards */}

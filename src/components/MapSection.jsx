@@ -1,6 +1,6 @@
 const MapSection = () => {
   return (
-    <section className="relative h-[400px] bg-[#efe6cd] group overflow-hidden" aria-label="Map and location section">
+    <section className="relative h-[400px] bg-cream-bg group overflow-hidden" aria-label="Map and location section">
       <img 
         src="/images/house_pic_from_out_with_table.jpeg" 
         alt="Wima Serenity Gardens grounds" 

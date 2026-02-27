@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&display=swap");
 
 @import "tailwindcss";
 
@@ -6,24 +6,44 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --green-deep: #2d5a3d;
+  --green-forest: #3a6b4a;
+  --green-sage: #6b9b7a;
+  --gold-accent: #a69055;
+  --cream-bg: #faf8f2;
+  --cream-light: #f5f2e6;
+  --green-mist: #e5f0e7;
+  --border-cream: #d4c9a8;
+}
+
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #FAF8F2;
+  font-family: "Inter", system-ui, sans-serif;
+  background-color: var(--cream-bg);
   color: #1f2937;
 }
 
 .font-display {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 .font-script {
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
 }
 
 .botanical-wash {
-  background: radial-gradient(circle at 12% 12%, rgba(45, 90, 61, 0.08) 0%, rgba(45, 90, 61, 0) 35%),
-    radial-gradient(circle at 88% 88%, rgba(166, 144, 85, 0.12) 0%, rgba(166, 144, 85, 0) 40%),
-    #faf8f2;
+  background:
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(45, 90, 61, 0.09) 0%,
+      rgba(45, 90, 61, 0) 35%
+    ),
+    radial-gradient(
+      circle at 88% 88%,
+      rgba(166, 144, 85, 0.14) 0%,
+      rgba(166, 144, 85, 0) 40%
+    ),
+    var(--cream-bg);
 }
 
 .glass-effect {
@@ -32,9 +52,47 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(135deg, rgba(250, 248, 242, 0.95) 0%, rgba(250, 248, 242, 0.8) 50%, rgba(250, 248, 242, 0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(250, 248, 242, 0.95) 0%,
+    rgba(250, 248, 242, 0.8) 50%,
+    rgba(250, 248, 242, 0.6) 100%
+  );
 }
 
 .hero-grid-image {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -8px rgba(45, 90, 61, 0.22),
+    0 10px 16px -8px rgba(0, 0, 0, 0.14);
+}
+
+.rustic-card {
+  background: var(--cream-light);
+  border: 1px solid var(--border-cream);
+  border-radius: 1rem;
+  box-shadow: 0 12px 24px -14px rgba(45, 90, 61, 0.28);
+}
+
+.btn-primary-rustic {
+  background: linear-gradient(180deg, var(--green-forest), var(--green-deep));
+  color: #fff;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-rustic:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.btn-outline-rustic {
+  background: var(--cream-light);
+  color: var(--green-deep);
+  border: 1px solid var(--border-cream);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-outline-rustic:hover {
+  background: #efe7d4;
 }

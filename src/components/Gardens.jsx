@@ -7,7 +7,7 @@ const Gardens = () => {
   ]
 
   return (
-    <section id="gardens" className="py-20 md:py-28 bg-[#f5efde]">
+    <section id="gardens" className="py-20 md:py-28 bg-green-mist/45">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
