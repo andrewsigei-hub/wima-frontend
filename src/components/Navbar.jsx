@@ -8,7 +8,7 @@ const Navbar = () => {
             <img 
               src="/images/wima-logo.jpeg" 
               alt="Wima Serenity Gardens" 
-              className="h-12 w-auto object-contain"
+              className="h-12 w-auto object-contain mix-blend-multiply"
             />
             <span className="font-display text-lg font-bold text-primary tracking-tight hidden sm:block">
               Wima Serenity Gardens
