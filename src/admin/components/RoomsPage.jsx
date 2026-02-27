@@ -411,7 +411,7 @@ export default function RoomsPage() {
   const isAdmin = user?.role === 'admin'
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
@@ -450,95 +450,97 @@ export default function RoomsPage() {
             No rooms found. Add one to get started.
           </div>
         ) : (
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/60">
-                <Th>Name</Th>
-                <Th>Type</Th>
-                <Th>Price / Night</Th>
-                <Th>Capacity</Th>
-                <Th>Featured</Th>
-                <Th>Active</Th>
-                <Th></Th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-50">
-              {rooms.map((room) => (
-                <tr
-                  key={room.id}
-                  className={`hover:bg-slate-50/50 transition-colors ${!room.is_active ? 'opacity-50' : ''}`}
-                >
-                  <td className="px-4 py-3">
-                    <p className="font-medium text-slate-800">{room.name}</p>
-                    <p className="text-slate-400 text-xs">{room.slug}</p>
-                  </td>
-                  <td className="px-4 py-3 capitalize text-slate-600">{room.type}</td>
-                  <td className="px-4 py-3 text-slate-700 font-medium">
-                    KSh {Number(room.price_per_night).toLocaleString()}
-                  </td>
-                  <td className="px-4 py-3 text-slate-600">{room.capacity} guests</td>
-                  <td className="px-4 py-3">
-                    {room.is_featured ? (
-                      <span className="text-xs font-medium bg-gold/20 text-gold border border-gold/30 rounded-full px-2.5 py-0.5">
-                        Featured
-                      </span>
-                    ) : (
-                      <span className="text-xs text-slate-400">—</span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
-                    {room.is_active ? (
-                      <span className="text-xs font-medium bg-green-50 text-green-700 border border-green-200 rounded-full px-2.5 py-0.5">
-                        Active
-                      </span>
-                    ) : (
-                      <span className="text-xs font-medium bg-slate-100 text-slate-500 border border-slate-200 rounded-full px-2.5 py-0.5">
-                        Inactive
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1">
-                      {isManager && (
-                        <IconBtn title="Edit" onClick={() => setEditRoom(room)}>
-                          <Pencil className="w-4 h-4" />
-                        </IconBtn>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-100 bg-slate-50/60">
+                  <Th>Name</Th>
+                  <Th>Type</Th>
+                  <Th>Price / Night</Th>
+                  <Th>Capacity</Th>
+                  <Th>Featured</Th>
+                  <Th>Active</Th>
+                  <Th></Th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {rooms.map((room) => (
+                  <tr
+                    key={room.id}
+                    className={`hover:bg-slate-50/50 transition-colors ${!room.is_active ? 'opacity-50' : ''}`}
+                  >
+                    <td className="px-4 py-3">
+                      <p className="font-medium text-slate-800 whitespace-nowrap">{room.name}</p>
+                      <p className="text-slate-400 text-xs whitespace-nowrap">{room.slug}</p>
+                    </td>
+                    <td className="px-4 py-3 capitalize text-slate-600 whitespace-nowrap">{room.type}</td>
+                    <td className="px-4 py-3 text-slate-700 font-medium whitespace-nowrap">
+                      KSh {Number(room.price_per_night).toLocaleString()}
+                    </td>
+                    <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{room.capacity} guests</td>
+                    <td className="px-4 py-3">
+                      {room.is_featured ? (
+                        <span className="text-xs font-medium bg-gold/20 text-gold border border-gold/30 rounded-full px-2.5 py-0.5">
+                          Featured
+                        </span>
+                      ) : (
+                        <span className="text-xs text-slate-400">—</span>
                       )}
-                      <IconBtn
-                        title={room.is_featured ? 'Remove from featured' : 'Mark as featured'}
-                        onClick={() => toggleFeatured(room)}
-                        danger={false}
-                      >
-                        {actioning === room.id ? (
-                          <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-                          </svg>
-                        ) : room.is_featured ? (
-                          <StarOff className="w-4 h-4" />
-                        ) : (
-                          <Star className="w-4 h-4" />
+                    </td>
+                    <td className="px-4 py-3">
+                      {room.is_active ? (
+                        <span className="text-xs font-medium bg-green-50 text-green-700 border border-green-200 rounded-full px-2.5 py-0.5">
+                          Active
+                        </span>
+                      ) : (
+                        <span className="text-xs font-medium bg-slate-100 text-slate-500 border border-slate-200 rounded-full px-2.5 py-0.5">
+                          Inactive
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1">
+                        {isManager && (
+                          <IconBtn title="Edit" onClick={() => setEditRoom(room)}>
+                            <Pencil className="w-4 h-4" />
+                          </IconBtn>
                         )}
-                      </IconBtn>
-                      {(isAdmin || isManager) && (
                         <IconBtn
-                          title={room.is_active ? 'Deactivate' : 'Activate'}
-                          onClick={() => toggleActive(room)}
-                          danger={room.is_active}
+                          title={room.is_featured ? 'Remove from featured' : 'Mark as featured'}
+                          onClick={() => toggleFeatured(room)}
+                          danger={false}
                         >
-                          {room.is_active ? (
-                            <PowerOff className="w-4 h-4" />
+                          {actioning === room.id ? (
+                            <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                            </svg>
+                          ) : room.is_featured ? (
+                            <StarOff className="w-4 h-4" />
                           ) : (
-                            <Power className="w-4 h-4" />
+                            <Star className="w-4 h-4" />
                           )}
                         </IconBtn>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        {(isAdmin || isManager) && (
+                          <IconBtn
+                            title={room.is_active ? 'Deactivate' : 'Activate'}
+                            onClick={() => toggleActive(room)}
+                            danger={room.is_active}
+                          >
+                            {room.is_active ? (
+                              <PowerOff className="w-4 h-4" />
+                            ) : (
+                              <Power className="w-4 h-4" />
+                            )}
+                          </IconBtn>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 

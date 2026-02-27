@@ -205,7 +205,7 @@ export default function EventInquiriesPage() {
   const currentPage = Math.floor(offset / LIMIT) + 1
 
   return (
-    <div className="p-8">
+    <div className="p-4 md:p-8">
       <div className="mb-6">
         <h1 className="font-display text-3xl font-bold text-primary">Event Inquiries</h1>
         <p className="text-slate-500 mt-1 text-sm">Weddings, corporate events, and more</p>
@@ -261,61 +261,63 @@ export default function EventInquiriesPage() {
             No event inquiries found for this filter.
           </div>
         ) : (
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-slate-100 bg-slate-50/60">
-                <Th>Name</Th>
-                <Th>Contact</Th>
-                <Th>Event Type</Th>
-                <Th>Date / Guests</Th>
-                <Th>Venue</Th>
-                <Th>Status</Th>
-                <Th></Th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-50">
-              {inquiries.map((inq) => (
-                <tr key={inq.id} className="hover:bg-slate-50/50 transition-colors">
-                  <td className="px-4 py-3 font-medium text-slate-800">{inq.name}</td>
-                  <td className="px-4 py-3">
-                    <p className="text-slate-700">{inq.email}</p>
-                    <p className="text-slate-400 text-xs">{inq.phone}</p>
-                  </td>
-                  <td className="px-4 py-3 capitalize text-slate-600">{inq.event_type}</td>
-                  <td className="px-4 py-3">
-                    <p className="text-slate-700">{fmt(inq.event_date)}</p>
-                    <p className="text-slate-400 text-xs">{inq.guest_count} guests</p>
-                  </td>
-                  <td className="px-4 py-3 text-slate-600 text-xs">
-                    {inq.venue_preference ? VENUE_LABELS[inq.venue_preference] || inq.venue_preference : '—'}
-                  </td>
-                  <td className="px-4 py-3"><StatusBadge status={inq.status} /></td>
-                  <td className="px-4 py-3">
-                    <div className="flex items-center gap-1">
-                      <IconBtn title="View" onClick={() => setSelected(inq)}>
-                        <MessageSquareDot className="w-4 h-4" />
-                      </IconBtn>
-                      {inq.status === 'new' && (
-                        <IconBtn title="Mark Read" onClick={() => handleAction(inq.id, 'mark-read')}>
-                          <Eye className="w-4 h-4" />
-                        </IconBtn>
-                      )}
-                      {inq.status !== 'replied' && inq.status !== 'archived' && (
-                        <IconBtn title="Mark Replied" onClick={() => handleAction(inq.id, 'mark-replied')}>
-                          <CheckCheck className="w-4 h-4" />
-                        </IconBtn>
-                      )}
-                      {inq.status !== 'archived' && (
-                        <IconBtn title="Archive" onClick={() => handleAction(inq.id, 'archive')}>
-                          <Archive className="w-4 h-4" />
-                        </IconBtn>
-                      )}
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-100 bg-slate-50/60">
+                  <Th>Name</Th>
+                  <Th>Contact</Th>
+                  <Th>Event Type</Th>
+                  <Th>Date / Guests</Th>
+                  <Th>Venue</Th>
+                  <Th>Status</Th>
+                  <Th></Th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {inquiries.map((inq) => (
+                  <tr key={inq.id} className="hover:bg-slate-50/50 transition-colors">
+                    <td className="px-4 py-3 font-medium text-slate-800 whitespace-nowrap">{inq.name}</td>
+                    <td className="px-4 py-3">
+                      <p className="text-slate-700 whitespace-nowrap">{inq.email}</p>
+                      <p className="text-slate-400 text-xs whitespace-nowrap">{inq.phone}</p>
+                    </td>
+                    <td className="px-4 py-3 capitalize text-slate-600 whitespace-nowrap">{inq.event_type}</td>
+                    <td className="px-4 py-3">
+                      <p className="text-slate-700 whitespace-nowrap">{fmt(inq.event_date)}</p>
+                      <p className="text-slate-400 text-xs whitespace-nowrap">{inq.guest_count} guests</p>
+                    </td>
+                    <td className="px-4 py-3 text-slate-600 text-xs whitespace-nowrap">
+                      {inq.venue_preference ? VENUE_LABELS[inq.venue_preference] || inq.venue_preference : '—'}
+                    </td>
+                    <td className="px-4 py-3"><StatusBadge status={inq.status} /></td>
+                    <td className="px-4 py-3">
+                      <div className="flex items-center gap-1">
+                        <IconBtn title="View" onClick={() => setSelected(inq)}>
+                          <MessageSquareDot className="w-4 h-4" />
+                        </IconBtn>
+                        {inq.status === 'new' && (
+                          <IconBtn title="Mark Read" onClick={() => handleAction(inq.id, 'mark-read')}>
+                            <Eye className="w-4 h-4" />
+                          </IconBtn>
+                        )}
+                        {inq.status !== 'replied' && inq.status !== 'archived' && (
+                          <IconBtn title="Mark Replied" onClick={() => handleAction(inq.id, 'mark-replied')}>
+                            <CheckCheck className="w-4 h-4" />
+                          </IconBtn>
+                        )}
+                        {inq.status !== 'archived' && (
+                          <IconBtn title="Archive" onClick={() => handleAction(inq.id, 'archive')}>
+                            <Archive className="w-4 h-4" />
+                          </IconBtn>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
 
         {!loading && total > LIMIT && (
