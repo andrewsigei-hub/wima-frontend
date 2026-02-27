@@ -1,21 +1,14 @@
 const Hero = () => {
   return (
     <main className="relative px-6 lg:px-16 pt-20 pb-20 overflow-hidden botanical-wash">
-      <div className="absolute top-6 left-6 lg:left-16 z-30 flex items-center gap-3 bg-white/70 backdrop-blur-sm border border-heritage-gold-soft/60 px-3 py-2 rounded-full shadow-sm">
-        <img
-          src="/images/wima-logo.jpeg"
-          alt="WIMA logo"
-          className="h-10 w-10 rounded-full object-cover border border-heritage-gold-soft/70"
-        />
-        <div className="leading-tight">
-          <p className="font-display text-primary text-lg">WIMA</p>
-          <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600">Serenity Gardens</p>
-        </div>
-      </div>
+      <img
+        src="/images/wima-logo.jpeg"
+        alt="WIMA logo"
+        className="absolute top-6 left-6 lg:left-16 z-30 h-10 w-auto object-contain mix-blend-multiply"
+      />
 
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
         <div className="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
-          <p className="font-script text-2xl text-heritage-gold">A botanical paradise in Kenya&apos;s highlands</p>
 
           <div className="inline-flex items-center space-x-2 bg-botanical/10 px-4 py-1.5 rounded-full border border-botanical/20">
             <span className="material-symbols-outlined text-primary text-base">location_on</span>
@@ -66,8 +59,7 @@ const Hero = () => {
             <img alt="Main house view from gardens" className="w-full h-full object-cover" src="/images/house_picture_from_garden.png" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             <div className="absolute bottom-8 left-8 text-white">
-              <p className="text-xs uppercase tracking-widest font-medium opacity-80 mb-1">The Residence</p>
-              <h3 className="text-2xl font-display">Timeless Architecture</h3>
+              <h3 className="text-2xl font-display">The Residence </h3>
             </div>
           </div>
 
