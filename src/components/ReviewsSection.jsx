@@ -1,4 +1,5 @@
 import { ReactGoogleReviews } from 'react-google-reviews'
+import 'react-google-reviews/dist/index.css'
 
 const ReviewsSection = () => {
   const featurableId = import.meta.env.VITE_GOOGLE_REVIEWS_FEATURABLE_ID
