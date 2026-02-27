@@ -171,7 +171,7 @@ export default function EventInquiriesPage() {
 
     try {
       const data = await adminApi.get(`/admin/event-inquiries?${params}`, token)
-      setInquiries(data.inquiries)
+      setInquiries(data.event_inquiries)
       setTotal(data.total)
     } catch (err) {
       setError(err.message || 'Failed to load event inquiries')
@@ -185,13 +185,8 @@ export default function EventInquiriesPage() {
 
   const handleAction = async (id, actionType) => {
     try {
-      if (actionType === 'mark-read') {
-        await adminApi.post(`/admin/event-inquiries/${id}/mark-read`, {}, token)
-      } else if (actionType === 'mark-replied') {
-        await adminApi.post(`/admin/event-inquiries/${id}/mark-replied`, {}, token)
-      } else if (actionType === 'archive') {
-        await adminApi.patch(`/admin/event-inquiries/${id}`, { status: 'archived' }, token)
-      }
+      const statusMap = { 'mark-read': 'read', 'mark-replied': 'replied', 'archive': 'archived' }
+      await adminApi.patch(`/admin/event-inquiries/${id}`, { status: statusMap[actionType] }, token)
       await fetchInquiries()
       setSelected((prev) => {
         if (!prev || prev.id !== id) return prev

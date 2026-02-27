@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import AllRoomsPage from './components/AllRoomsPage.jsx'
+import RoomDetailPage from './components/RoomDetailPage.jsx'
 import { AuthProvider } from './admin/context/AuthContext.jsx'
 import LoginPage from './admin/components/LoginPage.jsx'
 import AdminLayout from './admin/components/AdminLayout.jsx'
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
           {/* Public site */}
           <Route path="/" element={<App />} />
           <Route path="/rooms" element={<AllRoomsPage />} />
+          <Route path="/rooms/:slug" element={<RoomDetailPage />} />
 
           {/* Admin */}
           <Route path="/admin/login" element={<LoginPage />} />
