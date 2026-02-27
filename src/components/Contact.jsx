@@ -45,16 +45,16 @@ const Contact = () => {
     }
   }
 
-  const inputClass = 'w-full rounded-lg border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-primary focus:border-primary transition-all px-4 py-3 outline-none'
+  const inputClass = 'w-full rounded-lg border border-heritage-gold-soft/60 bg-[#fbf8ef] focus:ring-2 focus:ring-botanical focus:border-botanical transition-all px-4 py-3 outline-none'
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-accent/30">
+    <section id="contact" className="py-20 md:py-28 bg-[#f8f3e7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-primary/5 border border-primary/5">
-              <h2 className="font-display text-2xl font-bold text-primary mb-8">Send us a Message</h2>
+            <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-primary/5 border border-heritage-gold-soft/40">
+              <h2 className="font-display text-2xl font-bold text-botanical mb-8">Send us a Message</h2>
 
               {status === 'success' ? (
                 <div className="text-center py-10">
@@ -62,6 +62,7 @@ const Contact = () => {
                   <p className="text-lg font-semibold text-primary mb-2">Message sent!</p>
                   <p className="text-slate-600 mb-6">We&apos;ll get back to you soon.</p>
                   <button
+                    type="button"
                     onClick={() => setStatus('idle')}
                     className="text-primary font-semibold underline underline-offset-2"
                   >
@@ -147,7 +148,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="w-full bg-primary text-secondary py-4 rounded-lg font-bold hover:bg-primary-light transform active:scale-[0.98] transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-botanical text-secondary py-4 rounded-lg font-bold hover:bg-primary transform active:scale-[0.98] transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                   >
                     {status === 'loading' ? (
                       <>
@@ -169,10 +170,10 @@ const Contact = () => {
           {/* Contact Info */}
           <div className="lg:col-span-5 space-y-6">
             {contactMethods.map((method, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl border border-primary/5">
+              <div key={index} className="bg-white p-6 rounded-xl border border-heritage-gold-soft/40">
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="material-symbols-outlined text-primary bg-accent p-3 rounded-lg">{method.icon}</span>
-                  <h3 className="font-bold text-lg text-primary">{method.label}</h3>
+                  <span className="material-symbols-outlined text-botanical bg-[#f2ecda] p-3 rounded-lg">{method.icon}</span>
+                  <h3 className="font-bold text-lg text-botanical">{method.label}</h3>
                 </div>
                 {method.values.map((value, i) => (
                   method.link ? (

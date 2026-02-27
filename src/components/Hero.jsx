@@ -1,103 +1,86 @@
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="/images/large_aerial_view.PNG" 
-          alt="Aerial view of Wima Serenity Gardens" 
-          className="w-full h-full object-cover"
+    <main className="relative px-6 lg:px-16 pt-20 pb-20 overflow-hidden botanical-wash">
+      <div className="absolute top-6 left-6 lg:left-16 z-30 flex items-center gap-3 bg-white/70 backdrop-blur-sm border border-heritage-gold-soft/60 px-3 py-2 rounded-full shadow-sm">
+        <img
+          src="/images/wima-logo.jpeg"
+          alt="WIMA logo"
+          className="h-10 w-10 rounded-full object-cover border border-heritage-gold-soft/70"
         />
-        <div className="hero-gradient absolute inset-0"></div>
+        <div className="leading-tight">
+          <p className="font-display text-primary text-lg">WIMA</p>
+          <p className="text-[10px] uppercase tracking-[0.18em] text-slate-600">Serenity Gardens</p>
+        </div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-accent px-4 py-2 rounded-full mb-6">
-              <span className="material-symbols-outlined text-primary text-lg">location_on</span>
-              <span className="text-sm font-medium text-primary">Kericho, Kenya</span>
-            </div>
-            
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-primary leading-tight mb-6">
-              <span className="font-script text-5xl md:text-6xl lg:text-7xl block text-primary-light">Welcome to</span>
-              Wima Serenity Gardens
-            </h1>
-            
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Nestled in Kenya's tea country, discover a peaceful retreat where lush gardens, warm hospitality, and comfortable accommodations come together. Your perfect escape awaits.
-            </p>
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+        <div className="w-full lg:w-1/2 space-y-8 order-2 lg:order-1">
+          <p className="font-script text-2xl text-heritage-gold">A botanical paradise in Kenya&apos;s highlands</p>
 
-            {/* Features */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
-              <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-full">
-                <span className="material-symbols-outlined text-primary">cottage</span>
-                <span className="text-sm font-medium">7 Cozy Rooms</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-full">
-                <span className="material-symbols-outlined text-primary">park</span>
-                <span className="text-sm font-medium">Lush Gardens</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-full">
-                <span className="material-symbols-outlined text-primary">celebration</span>
-                <span className="text-sm font-medium">2 Event Venues</span>
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
-              <a 
-                href="#rooms" 
-                className="inline-flex items-center gap-2 bg-primary text-secondary px-8 py-4 rounded-lg font-semibold hover:bg-primary-light transform hover:-translate-y-1 transition-all shadow-lg shadow-primary/20"
-              >
-                View Rooms
-                <span className="material-symbols-outlined">arrow_forward</span>
-              </a>
-              <a 
-                href="#events" 
-                className="inline-flex items-center gap-2 bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:text-secondary transition-all"
-              >
-                Plan an Event
-              </a>
-            </div>
+          <div className="inline-flex items-center space-x-2 bg-botanical/10 px-4 py-1.5 rounded-full border border-botanical/20">
+            <span className="material-symbols-outlined text-primary text-base">location_on</span>
+            <span className="text-primary font-semibold text-xs tracking-widest uppercase">Kericho, Kenya</span>
           </div>
 
-            {/* Hero Image Card */}
-          <div className="relative hidden lg:block">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl shadow-primary/20">
-              <img 
-                src="/images/house_picture_from_garden.png" 
-                alt="Outdoor dining at Wima Serenity Gardens" 
-                className="w-full aspect-[4/3] object-cover"
-              />
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display leading-[1.08] text-botanical">
+            Find Your Peace at <br />
+            <span className="text-primary">WIMA Serenity Gardens</span>
+          </h1>
+
+          <p className="text-lg text-slate-700 max-w-xl leading-relaxed">
+            Rooted in a 9-year legacy of warmth and hospitality, we invite you to experience a sanctuary where manicured
+            landscapes meet the highland breeze. Whether a quiet retreat or a grand celebration, your story begins here.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+            <a
+              href="#rooms"
+              className="w-full sm:w-auto bg-botanical text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 shadow-lg shadow-botanical/20"
+            >
+              View Our Rooms
+              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+            <a
+              href="#events"
+              className="w-full sm:w-auto bg-[#f2ecda] text-botanical border border-heritage-gold-soft px-8 py-4 rounded-lg font-semibold hover:bg-[#e9dec2] transition-all flex items-center justify-center gap-2"
+            >
+              Plan an Event
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-heritage-gold-soft/60">
+            <div>
+              <div className="text-2xl font-display text-botanical">9+ Years</div>
+              <div className="text-xs uppercase tracking-wider text-slate-600 font-medium">Of Legacy</div>
             </div>
-            
-            {/* Floating Cards */}
-            <div className="absolute -bottom-6 -left-6 bg-white p-5 rounded-xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-gold text-3xl">star</span>
-                <div>
-                  <p className="font-display font-bold text-primary">Est. 2017</p>
-                  <p className="text-xs text-slate-500">9 Years of Hospitality</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="absolute -top-4 -right-4 bg-white p-5 rounded-xl shadow-xl">
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-primary text-3xl">restaurant</span>
-                <div>
-                  <p className="font-display font-bold text-primary">Breakfast</p>
-                  <p className="text-xs text-slate-500">Included with all rooms</p>
-                </div>
-              </div>
+            <div></div>
+            <div className="hidden md:block">
+              <div className="text-2xl font-display text-botanical">2 Acres</div>
+              <div className="text-xs uppercase tracking-wider text-slate-600 font-medium">Of Lush Gardens</div>
             </div>
           </div>
         </div>
+
+        <div className="w-full lg:w-1/2 order-1 lg:order-2 relative h-[440px] sm:h-[520px] lg:h-[680px] flex items-center justify-center">
+          <div className="absolute w-[100%] h-[75%] left-0 top-0 overflow-hidden rounded-3xl hero-grid-image">
+            <img alt="Main house view from gardens" className="w-full h-full object-cover" src="/images/house_picture_from_garden.png" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div className="absolute bottom-8 left-8 text-white">
+              <p className="text-xs uppercase tracking-widest font-medium opacity-80 mb-1">The Residence</p>
+              <h3 className="text-2xl font-display">Timeless Architecture</h3>
+            </div>
+          </div>
+
+          <div className="absolute w-[65%] h-[45%] bottom-0 right-0 overflow-hidden rounded-3xl hero-grid-image border-8 border-[#f5efe0] z-10 translate-x-2 lg:translate-x-8">
+            <img alt="Aerial view showing event tents and scale" className="w-full h-full object-cover" src="/images/tilted_aerial.PNG" />
+            <div className="absolute inset-0 bg-heritage-gold/25 hover:bg-transparent transition-all duration-500"></div>
+          </div>
+
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+        </div>
       </div>
-    </section>
+    </main>
   )
 }
 

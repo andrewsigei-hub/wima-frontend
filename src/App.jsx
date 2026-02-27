@@ -1,6 +1,4 @@
-import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import ServicesStrip from './components/ServicesStrip'
 import About from './components/About'
 import Rooms from './components/Rooms'
 import Events from './components/Events'
@@ -14,10 +12,8 @@ import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="bg-secondary text-slate-800">
-      <Navbar />
+    <div className="bg-background-light text-slate-800 min-h-screen">
       <Hero />
-      <ServicesStrip />
       <About />
       <Rooms />
       <Events />

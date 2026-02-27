@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="bg-primary text-secondary py-16">
+    <footer className="bg-botanical text-secondary py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Footer Content */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -11,7 +11,7 @@ const Footer = () => {
               alt="Wima Serenity Gardens" 
               className="h-20 w-auto mb-4 brightness-0 invert opacity-90"
             />
-            <p className="text-accent/80 text-sm leading-relaxed">
+            <p className="text-heritage-gold-soft/90 text-sm leading-relaxed">
               Your serene escape in Kenya's tea country. Guest house, leisure gardens, and event venue.
             </p>
           </div>
@@ -20,10 +20,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-3">
-              <li><a href="#about" className="text-accent/80 hover:text-secondary transition-colors text-sm">About Us</a></li>
-              <li><a href="#rooms" className="text-accent/80 hover:text-secondary transition-colors text-sm">Our Rooms</a></li>
-              <li><a href="#events" className="text-accent/80 hover:text-secondary transition-colors text-sm">Events</a></li>
-              <li><a href="#contact" className="text-accent/80 hover:text-secondary transition-colors text-sm">Contact</a></li>
+              <li><a href="#about" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">About Us</a></li>
+              <li><a href="#rooms" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Our Rooms</a></li>
+              <li><a href="#events" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Events</a></li>
+              <li><a href="#contact" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Contact</a></li>
             </ul>
           </div>
 
@@ -31,10 +31,10 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Room Types</h4>
             <ul className="space-y-3">
-              <li><a href="#rooms" className="text-accent/80 hover:text-secondary transition-colors text-sm">Standard Double</a></li>
-              <li><a href="#rooms" className="text-accent/80 hover:text-secondary transition-colors text-sm">Premier Room</a></li>
-              <li><a href="#rooms" className="text-accent/80 hover:text-secondary transition-colors text-sm">Family Room</a></li>
-              <li><a href="#rooms" className="text-accent/80 hover:text-secondary transition-colors text-sm">Garden Cottage</a></li>
+              <li><a href="#rooms" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Standard Double</a></li>
+              <li><a href="#rooms" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Premier Room</a></li>
+              <li><a href="#rooms" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Family Room</a></li>
+              <li><a href="#rooms" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Garden Cottage</a></li>
             </ul>
           </div>
 
@@ -42,16 +42,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
             <ul className="space-y-3">
-              <li><a href="tel:+254700000000" className="text-accent/80 hover:text-secondary transition-colors text-sm">+254 700 000 000</a></li>
-              <li><a href="mailto:info@wimaserenity.com" className="text-accent/80 hover:text-secondary transition-colors text-sm">info@wimaserenity.com</a></li>
-              <li><span className="text-accent/80 text-sm">Kericho, Kenya</span></li>
+              <li><a href="tel:+254700000000" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">+254 700 000 000</a></li>
+              <li><a href="mailto:info@wimaserenity.com" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">info@wimaserenity.com</a></li>
+              <li><span className="text-heritage-gold-soft/90 text-sm">Kericho, Kenya</span></li>
             </ul>
           </div>
         </div>
 
         {/* Footer Bottom */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-accent/60 text-sm">© 2017 – 2026 Wima Serenity Gardens. All rights reserved.</p>
+          <p className="text-heritage-gold-soft/70 text-sm">© 2017 – 2026 Wima Serenity Gardens. All rights reserved.</p>
           <div className="flex gap-4">
             <a href="#" className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary hover:text-primary transition-all">
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>

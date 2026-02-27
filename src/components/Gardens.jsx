@@ -7,13 +7,13 @@ const Gardens = () => {
   ]
 
   return (
-    <section id="gardens" className="py-20 md:py-28 bg-accent/30">
+    <section id="gardens" className="py-20 md:py-28 bg-[#f5efde]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-3 block">Our Gardens</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium text-primary leading-tight mb-4">
-            A <span className="font-script text-4xl md:text-5xl text-primary-light">Botanical Paradise</span>
+          <span className="text-sm font-semibold text-heritage-gold uppercase tracking-widest mb-3 block">Our Gardens</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-botanical leading-tight mb-4">
+            A <span className="font-script text-4xl md:text-5xl text-heritage-gold">Botanical Paradise</span>
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
             Stroll through our meticulously maintained gardens featuring vibrant flowers, tropical palms, and peaceful pathways.
@@ -66,8 +66,8 @@ const Gardens = () => {
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {features.map((feature, index) => (
             <div key={index}>
-              <span className="material-symbols-outlined text-primary text-3xl mb-2">{feature.icon}</span>
-              <p className="font-medium text-primary">{feature.label}</p>
+              <span className="material-symbols-outlined text-botanical text-3xl mb-2">{feature.icon}</span>
+              <p className="font-medium text-botanical">{feature.label}</p>
               <p className="text-xs text-slate-500">{feature.sub}</p>
             </div>
           ))}

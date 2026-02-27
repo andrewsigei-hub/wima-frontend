@@ -7,22 +7,22 @@ const Amenities = () => {
   ]
 
   return (
-    <section id="amenities" className="py-20 md:py-28 bg-secondary">
+    <section id="amenities" className="py-20 md:py-28 bg-[#f7f1e4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-3 block">What We Offer</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium text-primary">Amenities & Services</h2>
+          <span className="text-sm font-semibold text-heritage-gold uppercase tracking-widest mb-3 block">What We Offer</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-botanical">Amenities & Services</h2>
         </div>
 
         {/* Amenity Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {amenities.map((amenity, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl border border-primary/5 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="material-symbols-outlined text-primary text-2xl">{amenity.icon}</span>
+            <div key={index} className="bg-white p-6 rounded-xl border border-heritage-gold-soft/40 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+              <div className="w-16 h-16 bg-[#f2ecda] rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="material-symbols-outlined text-botanical text-2xl">{amenity.icon}</span>
               </div>
-              <h3 className="font-display text-lg font-semibold text-primary mb-1">{amenity.label}</h3>
+              <h3 className="font-display text-lg font-semibold text-botanical mb-1">{amenity.label}</h3>
               <p className="text-xs text-slate-500">{amenity.sub}</p>
             </div>
           ))}

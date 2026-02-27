@@ -90,7 +90,7 @@ const FALLBACK_PKG = {
 // ─── Booking Modal ────────────────────────────────────────────────────────────
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all px-4 py-3 text-slate-800'
+  'w-full rounded-lg border border-heritage-gold-soft/60 bg-[#fbf8ef] focus:ring-2 focus:ring-botanical focus:border-botanical outline-none transition-all px-4 py-3 text-slate-800'
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -265,18 +265,18 @@ const Rooms = () => {
   const closeBooking       = ()      => setBookingTarget(null)
 
   return (
-    <section id="rooms" className="py-20 md:py-28 bg-primary">
+    <section id="rooms" className="py-20 md:py-28 bg-botanical">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
           <div>
-            <span className="text-sm font-semibold text-accent uppercase tracking-widest mb-3 block">Accommodations</span>
+            <span className="text-sm font-semibold text-heritage-gold-soft uppercase tracking-widest mb-3 block">Accommodations</span>
             <h2 className="font-display text-3xl md:text-4xl font-medium text-secondary leading-tight">
               Our <span className="font-script text-4xl md:text-5xl text-accent">Comfortable Rooms</span>
             </h2>
-            <p className="text-primary-light mt-2">All rooms include breakfast</p>
+            <p className="text-heritage-gold-soft/80 mt-2">All rooms include breakfast</p>
           </div>
-          <a href="#contact" className="mt-4 md:mt-0 inline-flex items-center gap-2 text-secondary font-semibold hover:gap-3 transition-all">
+          <a href="#contact" className="mt-4 md:mt-0 inline-flex items-center gap-2 text-secondary font-semibold hover:gap-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft rounded-md px-1">
             View All Rooms
             <span className="material-symbols-outlined">arrow_forward</span>
           </a>
@@ -315,8 +315,10 @@ const Rooms = () => {
                       <span className="text-xs text-slate-400">/night</span>
                     </div>
                     <button
+                      type="button"
+                      aria-label={`Book ${room.name}`}
                       onClick={() => openRoomBooking(room)}
-                      className="px-5 py-2 border border-accent text-accent rounded-lg text-sm font-semibold hover:bg-cream hover:text-primary hover:border-cream transition-all"
+                      className="px-5 py-2 border border-heritage-gold-soft text-heritage-gold-soft rounded-lg text-sm font-semibold hover:bg-[#f2ecda] hover:text-botanical hover:border-[#f2ecda] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book
                     </button>
@@ -392,8 +394,9 @@ const Rooms = () => {
                       <p className="text-xs text-secondary/50 mt-1">Up to {pkg.capacity} guests</p>
                     </div>
                     <button
+                      type="button"
                       onClick={openPackageBooking}
-                      className="inline-block bg-secondary text-primary px-8 py-3 rounded-lg font-bold hover:bg-accent hover:text-primary transition-all text-sm"
+                      className="inline-block bg-[#f2ecda] text-botanical px-8 py-3 rounded-lg font-bold hover:bg-heritage-gold-soft hover:text-botanical transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book Entire Property
                     </button>

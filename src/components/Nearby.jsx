@@ -46,14 +46,14 @@ const attractions = [
 
 const Nearby = () => {
   return (
-    <section id="nearby" className="py-20 md:py-28 bg-accent/30">
+    <section id="nearby" className="py-20 md:py-28 bg-[#f3ecda]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="text-center mb-14">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-3 block">Explore the Region</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium text-primary leading-tight mb-4">
-            Perfectly <span className="font-script text-4xl md:text-5xl text-primary-light">Positioned</span> to Explore
+          <span className="text-sm font-semibold text-heritage-gold uppercase tracking-widest mb-3 block">Explore the Region</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-botanical leading-tight mb-4">
+            Perfectly <span className="font-script text-4xl md:text-5xl text-heritage-gold">Positioned</span> to Explore
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
             Kericho sits at the heart of western Kenya — making Wima Serenity Gardens an ideal base for day trips to iconic wildlife reserves, forests, lakes, and cities.
@@ -63,11 +63,11 @@ const Nearby = () => {
         {/* Cities distance row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
           {cities.map((city, i) => (
-            <div key={i} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-primary/5 flex flex-col items-center gap-2">
-              <span className="material-symbols-outlined text-primary text-3xl">{city.icon}</span>
-              <p className="font-display font-semibold text-primary text-lg">{city.name}</p>
+            <div key={i} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-heritage-gold-soft/40 flex flex-col items-center gap-2">
+              <span className="material-symbols-outlined text-botanical text-3xl">{city.icon}</span>
+              <p className="font-display font-semibold text-botanical text-lg">{city.name}</p>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-primary-light">{city.distance}</span>
+                <span className="text-2xl font-bold text-heritage-gold">{city.distance}</span>
               </div>
               <p className="text-xs text-slate-400">{city.time} drive</p>
               <p className="text-xs text-slate-500 italic">{city.note}</p>
@@ -76,19 +76,19 @@ const Nearby = () => {
         </div>
 
         {/* Attractions grid */}
-        <h3 className="font-display text-xl md:text-2xl font-medium text-primary mb-6 text-center">
+        <h3 className="font-display text-xl md:text-2xl font-medium text-botanical mb-6 text-center">
           Nearby Attractions
         </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {attractions.map((attr, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-primary/5 flex gap-4 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-                <span className="material-symbols-outlined text-primary text-2xl">{attr.icon}</span>
+            <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-heritage-gold-soft/40 flex gap-4 items-start">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#f2ecda] flex items-center justify-center">
+                <span className="material-symbols-outlined text-botanical text-2xl">{attr.icon}</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <p className="font-semibold text-primary">{attr.name}</p>
-                  <span className="text-xs bg-accent text-primary px-2 py-0.5 rounded-full font-medium">{attr.distance}</span>
+                  <p className="font-semibold text-botanical">{attr.name}</p>
+                  <span className="text-xs bg-[#efe6cd] text-botanical px-2 py-0.5 rounded-full font-medium">{attr.distance}</span>
                 </div>
                 <p className="text-sm text-slate-600 leading-relaxed">{attr.description}</p>
               </div>
@@ -97,7 +97,7 @@ const Nearby = () => {
         </div>
 
         {/* Callout */}
-        <div className="mt-12 bg-primary rounded-2xl p-8 text-center text-secondary">
+        <div className="mt-12 bg-botanical rounded-2xl p-8 text-center text-secondary">
           <span className="material-symbols-outlined text-4xl mb-3 block">directions_car</span>
           <h4 className="font-display text-xl font-semibold mb-2">Need Help Planning a Day Trip?</h4>
           <p className="text-secondary/80 text-sm max-w-md mx-auto mb-5">
@@ -105,7 +105,7 @@ const Nearby = () => {
           </p>
           <a
             href="#contact"
-            className="inline-block bg-secondary text-primary px-6 py-3 rounded-full font-bold hover:bg-accent transition-all text-sm"
+            className="inline-block bg-[#f2ecda] text-botanical px-6 py-3 rounded-full font-bold hover:bg-heritage-gold-soft transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
           >
             Get in Touch
           </a>

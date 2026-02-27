@@ -2,7 +2,7 @@ import { useState } from 'react'
 import api from '../lib/api'
 
 const inputClass =
-  'w-full rounded-lg border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all px-4 py-3 text-slate-800'
+  'w-full rounded-lg border border-heritage-gold-soft/60 bg-[#fbf8ef] focus:ring-2 focus:ring-botanical focus:border-botanical outline-none transition-all px-4 py-3 text-slate-800'
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -62,7 +62,7 @@ function EventInquiryModal({ venuePreference, onClose }) {
             <h3 className="font-display text-xl font-bold text-primary">Event Inquiry</h3>
             <p className="text-sm text-slate-500 mt-0.5">Tell us about your event and we&apos;ll be in touch</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
+          <button type="button" aria-label="Close event inquiry modal" onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
             <span className="material-symbols-outlined">close</span>
           </button>
         </div>
@@ -72,7 +72,7 @@ function EventInquiryModal({ venuePreference, onClose }) {
             <span className="material-symbols-outlined text-5xl text-green-500 mb-4 block">check_circle</span>
             <p className="text-lg font-semibold text-primary mb-2">Inquiry sent!</p>
             <p className="text-slate-600 mb-6">We&apos;ll be in touch to discuss your event shortly.</p>
-            <button onClick={onClose} className="text-primary font-semibold underline underline-offset-2">
+            <button type="button" onClick={onClose} className="text-primary font-semibold underline underline-offset-2">
               Close
             </button>
           </div>
@@ -149,7 +149,7 @@ function EventInquiryModal({ venuePreference, onClose }) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full bg-primary text-secondary py-3 rounded-lg font-bold hover:bg-primary-light transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-botanical text-secondary py-3 rounded-lg font-bold hover:bg-primary transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
             >
               {status === 'loading' ? (
                 <>
@@ -209,13 +209,13 @@ const Events = () => {
   ]
 
   return (
-    <section id="events" className="py-20 md:py-28 bg-secondary">
+    <section id="events" className="py-20 md:py-28 bg-[#f8f4e8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-3 block">Events</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium text-primary leading-tight mb-4">
-            <span className="font-script text-4xl md:text-5xl text-primary-light block">Host Your Event</span>
+          <span className="text-sm font-semibold text-heritage-gold uppercase tracking-widest mb-3 block">Events</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-botanical leading-tight mb-4">
+            <span className="font-script text-4xl md:text-5xl text-heritage-gold block">Host Your Event</span>
             With Us
           </h2>
           <p className="text-slate-600 max-w-2xl mx-auto">
@@ -226,7 +226,7 @@ const Events = () => {
         {/* Two Venue Cards */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
           {venues.map((venue, index) => (
-            <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-lg border border-primary/5 hover:-translate-y-2 transition-all duration-300">
+            <div key={index} className="bg-white rounded-2xl overflow-hidden shadow-lg border border-heritage-gold-soft/40 hover:-translate-y-2 transition-all duration-300">
               <div className="h-56 relative overflow-hidden">
                 <img src={venue.image} alt={venue.name} className="w-full h-full object-cover" />
                 <div className={`absolute top-4 left-4 ${venue.tagColor} px-3 py-1 rounded-full text-xs font-semibold`}>
@@ -237,10 +237,10 @@ const Events = () => {
                 <h3 className="font-display text-xl font-semibold text-primary mb-2">{venue.name}</h3>
                 <p className="text-sm text-slate-600 mb-4">{venue.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-accent rounded-full text-xs text-primary">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#f2ecda] rounded-full text-xs text-botanical">
                     <span className="material-symbols-outlined text-sm">groups</span> {venue.capacity}
                   </span>
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-accent rounded-full text-xs text-primary">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#f2ecda] rounded-full text-xs text-botanical">
                     <span className="material-symbols-outlined text-sm">{venue.featureIcon}</span> {venue.feature}
                   </span>
                 </div>
@@ -250,8 +250,10 @@ const Events = () => {
                     <span className="text-xs text-slate-500">/day</span>
                   </div>
                   <button
+                    type="button"
+                    aria-label={`Inquire about ${venue.name}`}
                     onClick={() => setEventModal(venue.venuePreference)}
-                    className="px-5 py-2 bg-primary text-secondary rounded-lg text-sm font-semibold hover:bg-primary-light transition-all"
+                    className="px-5 py-2 bg-botanical text-secondary rounded-lg text-sm font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                   >
                     Inquire
                   </button>
@@ -266,7 +268,7 @@ const Events = () => {
           <p className="text-sm text-slate-500 mb-4">Perfect for:</p>
           <div className="flex flex-wrap justify-center gap-3">
             {eventTypes.map((type, index) => (
-              <span key={index} className="inline-flex items-center gap-2 px-4 py-2 bg-accent rounded-full text-sm text-primary">
+              <span key={index} className="inline-flex items-center gap-2 px-4 py-2 bg-[#efe6cd] rounded-full text-sm text-botanical">
                 <span className="material-symbols-outlined text-base">{type.icon}</span> {type.label}
               </span>
             ))}

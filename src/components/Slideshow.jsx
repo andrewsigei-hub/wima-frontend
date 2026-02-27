@@ -65,13 +65,13 @@ const Slideshow = () => {
   }, [paused, goNext])
 
   return (
-    <section id="slideshow" className="py-20 md:py-28 bg-secondary">
+    <section id="slideshow" className="py-20 md:py-28 bg-[#f8f3e7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-3 block">The Grounds</span>
-          <h2 className="font-display text-3xl md:text-4xl font-medium text-primary leading-tight">
-            Experience Our <span className="font-script text-4xl md:text-5xl text-primary-light">Serene Estate</span>
+          <span className="text-sm font-semibold text-heritage-gold uppercase tracking-widest mb-3 block">The Grounds</span>
+          <h2 className="font-display text-3xl md:text-4xl font-medium text-botanical leading-tight">
+            Experience Our <span className="font-script text-4xl md:text-5xl text-heritage-gold">Serene Estate</span>
           </h2>
         </div>
 
@@ -110,14 +110,14 @@ const Slideshow = () => {
           <button
             onClick={goPrev}
             aria-label="Previous image"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
           >
             <span className="material-symbols-outlined">chevron_left</span>
           </button>
           <button
             onClick={goNext}
             aria-label="Next image"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-all hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
           >
             <span className="material-symbols-outlined">chevron_right</span>
           </button>
@@ -132,7 +132,7 @@ const Slideshow = () => {
                 key={i}
                 onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`rounded-full transition-all ${i === realIndex ? 'w-6 h-2 bg-primary' : 'w-2 h-2 bg-primary/30 hover:bg-primary/60'}`}
+                className={`rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft ${i === realIndex ? 'w-6 h-2 bg-primary' : 'w-2 h-2 bg-primary/30 hover:bg-primary/60'}`}
               />
             ))}
           </div>
@@ -144,7 +144,7 @@ const Slideshow = () => {
                 key={i}
                 onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all ${i === realIndex ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
+                className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft ${i === realIndex ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
               >
                 <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
               </button>
