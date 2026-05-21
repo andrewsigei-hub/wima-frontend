@@ -2,7 +2,7 @@ import { useState } from 'react'
 import api from '../lib/api'
 
 const inputClass =
-  'w-full rounded-lg border border-heritage-gold-soft/60 bg-[#fbf8ef] focus:ring-2 focus:ring-botanical focus:border-botanical outline-none transition-all px-4 py-3 text-slate-800'
+  'w-full rounded-lg border border-heritage-gold-soft/60 bg-cream-bg focus:ring-2 focus:ring-botanical focus:border-botanical outline-none transition-all px-4 py-3 text-slate-800'
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -59,7 +59,7 @@ function EventInquiryModal({ venuePreference, onClose }) {
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h3 className="font-display text-xl font-bold text-primary">Event Inquiry</h3>
+            <h3 className="font-display text-xl font-bold text-botanical">Event Inquiry</h3>
             <p className="text-sm text-slate-500 mt-0.5">Tell us about your event and we&apos;ll be in touch</p>
           </div>
           <button type="button" aria-label="Close event inquiry modal" onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
@@ -70,9 +70,9 @@ function EventInquiryModal({ venuePreference, onClose }) {
         {status === 'success' ? (
           <div className="text-center py-8">
             <span className="material-symbols-outlined text-5xl text-green-500 mb-4 block">check_circle</span>
-            <p className="text-lg font-semibold text-primary mb-2">Inquiry sent!</p>
+            <p className="text-lg font-semibold text-botanical mb-2">Inquiry sent!</p>
             <p className="text-slate-600 mb-6">We&apos;ll be in touch to discuss your event shortly.</p>
-            <button type="button" onClick={onClose} className="text-primary font-semibold underline underline-offset-2">
+            <button type="button" onClick={onClose} className="text-botanical font-semibold underline underline-offset-2">
               Close
             </button>
           </div>
@@ -149,7 +149,7 @@ function EventInquiryModal({ venuePreference, onClose }) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full bg-botanical text-secondary py-3 rounded-lg font-bold hover:bg-primary transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+              className="w-full bg-botanical text-secondary py-3 rounded-lg font-bold hover:bg-botanical-soft transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
             >
               {status === 'loading' ? (
                 <>
@@ -181,7 +181,7 @@ const Events = () => {
       description: 'Our larger venue with expansive lawns, perfect for weddings and large celebrations. Accommodates up to 500 guests.',
       image: '/images/large_aerial_view.PNG',
       tag: 'Popular',
-      tagColor: 'bg-gold text-white',
+      tagColor: 'bg-heritage-gold text-white',
       capacity: 'Up to 500 guests',
       feature: 'Tent setup',
       featureIcon: 'tent',
@@ -190,9 +190,9 @@ const Events = () => {
     {
       name: 'Garden Terrace',
       description: 'A more intimate setting surrounded by our beautiful gardens. Ideal for corporate events and smaller gatherings.',
-      image: '/images/house_pic_from_out_with_table.jpeg',
+      image: '/images/2nd Venue/IMG_4870.JPG',
       tag: 'Intimate',
-      tagColor: 'bg-cream text-primary',
+      tagColor: 'bg-cream-light text-botanical',
       capacity: 'Up to 200 guests',
       feature: 'Garden views',
       featureIcon: 'local_florist',
@@ -231,7 +231,7 @@ const Events = () => {
             <button
               type="button"
               onClick={() => setEventModal('')}
-              className="px-6 py-3 rounded-lg bg-botanical text-secondary font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+              className="px-6 py-3 rounded-lg bg-botanical text-secondary font-semibold hover:bg-botanical-soft transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
             >
               Inquire Now
             </button>
@@ -249,26 +249,26 @@ const Events = () => {
                 </div>
               </div>
               <div className="p-6">
-                <h3 className="font-display text-xl font-semibold text-primary mb-2">{venue.name}</h3>
+                <h3 className="font-display text-xl font-semibold text-botanical mb-2">{venue.name}</h3>
                 <p className="text-sm text-slate-600 mb-4">{venue.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#f2ecda] rounded-full text-xs text-botanical">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-cream-light rounded-full text-xs text-botanical">
                     <span className="material-symbols-outlined text-sm">groups</span> {venue.capacity}
                   </span>
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#f2ecda] rounded-full text-xs text-botanical">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-cream-light rounded-full text-xs text-botanical">
                     <span className="material-symbols-outlined text-sm">{venue.featureIcon}</span> {venue.feature}
                   </span>
                 </div>
-                <div className="flex justify-between items-center pt-4 border-t border-primary/10">
+                <div className="flex justify-between items-center pt-4 border-t border-botanical/10">
                   <div>
-                    <span className="font-display text-2xl font-semibold text-primary">KSh 50,000</span>
+                    <span className="font-display text-2xl font-semibold text-botanical">KSh 50,000</span>
                     <span className="text-xs text-slate-500">/day</span>
                   </div>
                   <button
                     type="button"
                     aria-label={`Inquire about ${venue.name}`}
                     onClick={() => setEventModal(venue.venuePreference)}
-                    className="px-5 py-2 bg-botanical text-secondary rounded-lg text-sm font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                    className="px-5 py-2 bg-botanical text-secondary rounded-lg text-sm font-semibold hover:bg-botanical-soft transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                   >
                     Inquire
                   </button>
@@ -283,7 +283,7 @@ const Events = () => {
           <p className="text-sm text-slate-500 mb-4">Perfect for:</p>
           <div className="flex flex-wrap justify-center gap-3">
             {eventTypes.map((type, index) => (
-              <span key={index} className="inline-flex items-center gap-2 px-4 py-2 bg-[#efe6cd] rounded-full text-sm text-botanical">
+              <span key={index} className="inline-flex items-center gap-2 px-4 py-2 bg-cream-light rounded-full text-sm text-botanical">
                 <span className="material-symbols-outlined text-base">{type.icon}</span> {type.label}
               </span>
             ))}

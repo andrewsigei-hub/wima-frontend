@@ -71,7 +71,7 @@ const Contact = () => {
   };
 
   const inputClass =
-    "w-full rounded-lg border border-heritage-gold-soft/60 bg-[#fbf8ef] focus:ring-2 focus:ring-botanical focus:border-botanical transition-all px-4 py-3 outline-none";
+    "w-full rounded-lg border border-heritage-gold-soft/60 bg-cream-bg focus:ring-2 focus:ring-botanical focus:border-botanical transition-all px-4 py-3 outline-none";
 
   return (
     <section id="contact" className="py-20 md:py-28 bg-cream-bg">
@@ -79,7 +79,7 @@ const Contact = () => {
         <div className="grid lg:grid-cols-12 gap-12 items-start">
           {/* Contact Form */}
           <div className="lg:col-span-7">
-            <div className="rustic-card bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-primary/5">
+            <div className="rustic-card bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-botanical/5">
               <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="font-display text-2xl font-bold text-botanical">
                   Send us a Message
@@ -99,7 +99,7 @@ const Contact = () => {
                   <span className="material-symbols-outlined text-5xl text-green-500 mb-4 block">
                     check_circle
                   </span>
-                  <p className="text-lg font-semibold text-primary mb-2">
+                  <p className="text-lg font-semibold text-botanical mb-2">
                     Message sent!
                   </p>
                   <p className="text-slate-600 mb-6">
@@ -108,7 +108,7 @@ const Contact = () => {
                   <button
                     type="button"
                     onClick={() => setStatus("idle")}
-                    className="text-primary font-semibold underline underline-offset-2"
+                    className="text-botanical font-semibold underline underline-offset-2"
                   >
                     Send another message
                   </button>
@@ -203,7 +203,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full bg-botanical text-secondary py-4 rounded-lg font-bold hover:bg-primary transform active:scale-[0.98] transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                    className="w-full bg-botanical text-secondary py-4 rounded-lg font-bold hover:bg-botanical-soft transform active:scale-[0.98] transition-all flex justify-center items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                   >
                     {status === "loading" ? (
                       <>
@@ -234,7 +234,7 @@ const Contact = () => {
                   className="rustic-card bg-white p-6 rounded-xl"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="text-botanical bg-[#f2ecda] p-3 rounded-lg">
+                    <span className="text-botanical bg-cream-light p-3 rounded-lg">
                       <Icon size={18} />
                     </span>
                     <h3 className="font-bold text-lg text-botanical">
@@ -246,7 +246,7 @@ const Contact = () => {
                       <a
                         key={i}
                         href={method.link}
-                        className="text-primary font-bold hover:underline flex items-center gap-1"
+                        className="text-botanical font-bold hover:underline flex items-center gap-1"
                       >
                         {value}
                         <span className="material-symbols-outlined text-sm">

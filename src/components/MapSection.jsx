@@ -2,7 +2,7 @@ const MapSection = () => {
   return (
     <section className="relative h-[400px] bg-cream-bg group overflow-hidden" aria-label="Map and location section">
       <img 
-        src="/images/house_pic_from_out_with_table.jpeg" 
+        src="images/google_maps_pic.png" 
         alt="Wima Serenity Gardens grounds" 
         className="w-full h-full object-cover opacity-60"
       />

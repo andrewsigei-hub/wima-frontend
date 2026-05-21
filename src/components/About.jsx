@@ -36,21 +36,21 @@ const About = () => {
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="/images/balcony_pathway.webp"
+                src="/images/balc-pathway-sub.JPG"
                 alt="Stone pathway through gardens"
                 className="w-full aspect-[3/4] object-cover"
               />
             </div>
-            <div className="absolute -bottom-8 right-0 w-2/3 rounded-2xl overflow-hidden shadow-xl border-4 border-[#f7f2e6]">
+            <div className="absolute -bottom-8 right-0 w-2/3 rounded-2xl overflow-hidden shadow-xl border-4 border-cream-light">
               <img
-                src="/images/right-side_garden_from_bottom.webp"
+                src="/images/house_pic_far.JPG"
                 alt="Lush garden lawn"
                 className="w-full aspect-[4/3] object-cover"
               />
             </div>
             {/* Badge */}
-            <div className="absolute top-6 right-1/4 w-24 h-24 bg-[#f2ecda] border-4 border-heritage-gold-soft/50 rounded-full flex flex-col items-center justify-center shadow-lg">
-              <span className="font-display text-3xl font-bold text-primary leading-none">
+            <div className="absolute top-6 right-1/4 w-24 h-24 bg-cream-light border-4 border-heritage-gold-soft/50 rounded-full flex flex-col items-center justify-center shadow-lg">
+              <span className="font-display text-3xl font-bold text-botanical leading-none">
                 9
               </span>
               <span className="text-xs text-slate-600 uppercase tracking-wider">
@@ -76,7 +76,7 @@ const About = () => {
                     key={index}
                     className="rustic-card flex items-center gap-3 p-4 rounded-xl"
                   >
-                    <Icon size={18} className="text-primary" />
+                    <Icon size={18} className="text-botanical" />
                     <span className="text-sm font-medium">{feature.label}</span>
                   </div>
                 );

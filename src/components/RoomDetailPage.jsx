@@ -3,15 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 import api from '../lib/api'
 import BookingModal from './BookingModal'
 
-const TAG_MAP = {
-  standard:  { tag: 'Value',     tagColor: 'bg-[#f2ecda] text-botanical' },
-  double:    { tag: 'Value',     tagColor: 'bg-[#f2ecda] text-botanical' },
-  premier:   { tag: 'Popular',   tagColor: 'bg-gold text-white' },
-  executive: { tag: 'Executive', tagColor: 'bg-gold text-white' },
-  cottage:   { tag: 'Private',   tagColor: 'bg-[#f2ecda] text-botanical' },
-  deluxe:    { tag: 'Deluxe',    tagColor: 'bg-gold text-white' },
-  family:    { tag: 'Family',    tagColor: 'bg-[#f2ecda] text-botanical' },
-}
+
 
 const AMENITY_ICON_MAP = {
   'Double Bed':    'bed',
@@ -61,14 +53,14 @@ export default function RoomDetailPage() {
       .finally(() => setLoading(false))
   }, [slug])
 
-  const { tag, tagColor } = (room && TAG_MAP[room.type]) || { tag: 'Room', tagColor: 'bg-[#f2ecda] text-botanical' }
+
   const amenities = Array.isArray(room?.amenities) ? room.amenities : []
   const images = Array.isArray(room?.images) ? room.images : []
 
   // ── Loading ────────────────────────────────────────────────────────────────
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FAF8F2] flex items-center justify-center">
+      <div className="min-h-screen bg-cream-bg flex items-center justify-center">
         <div className="flex items-center gap-3 text-slate-500">
           <svg className="animate-spin w-6 h-6" viewBox="0 0 24 24" fill="none">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -83,13 +75,13 @@ export default function RoomDetailPage() {
   // ── Not Found ──────────────────────────────────────────────────────────────
   if (notFound || !room) {
     return (
-      <div className="min-h-screen bg-[#FAF8F2] flex flex-col items-center justify-center px-6 text-center">
+      <div className="min-h-screen bg-cream-bg flex flex-col items-center justify-center px-6 text-center">
         <span className="material-symbols-outlined text-6xl text-botanical/30 mb-4">hotel</span>
         <h1 className="font-display text-3xl text-botanical mb-2">Room not found</h1>
         <p className="text-slate-500 mb-6">The room you&apos;re looking for doesn&apos;t exist or has been removed.</p>
         <Link
           to="/rooms"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-botanical text-secondary font-semibold hover:bg-primary transition-all"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-botanical text-secondary font-semibold hover:bg-botanical-soft transition-all"
         >
           <span className="material-symbols-outlined text-base">arrow_back</span>
           Back to All Rooms
@@ -100,7 +92,7 @@ export default function RoomDetailPage() {
 
   // ── Detail ─────────────────────────────────────────────────────────────────
   return (
-    <div className="min-h-screen bg-[#FAF8F2]">
+    <div className="min-h-screen bg-cream-bg">
       {/* Sticky top bar */}
       <div className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-heritage-gold-soft/40 px-4 sm:px-6 py-3 flex items-center justify-between">
         <Link
@@ -112,14 +104,13 @@ export default function RoomDetailPage() {
         </Link>
         <button
           onClick={() => setBookingOpen(true)}
-          className="px-5 py-2 rounded-lg bg-botanical text-secondary text-sm font-semibold hover:bg-primary transition-all"
+          className="px-5 py-2 rounded-lg bg-botanical text-secondary text-sm font-semibold hover:bg-botanical-soft transition-all"
         >
           Book Now
         </button>
       </div>
 
-      {/* Hero image */}
-      <div className="h-64 md:h-80 w-full bg-linear-to-br from-primary-light to-primary overflow-hidden">
+      <div className="h-64 md:h-80 w-full bg-linear-to-br from-botanical-soft to-botanical overflow-hidden">
         {images[0] ? (
           <img src={images[0]} alt={room.name} className="w-full h-full object-cover" />
         ) : (
@@ -149,9 +140,7 @@ export default function RoomDetailPage() {
         {/* Left — main info */}
         <div className="md:col-span-2">
           <div className="flex flex-wrap items-center gap-3 mb-3">
-            <span className={`text-xs uppercase tracking-widest px-3 py-1 rounded-full font-semibold ${tagColor}`}>
-              {tag}
-            </span>
+
             {room.breakfast_included && (
               <span className="flex items-center gap-1 text-xs text-botanical bg-botanical/10 px-3 py-1 rounded-full">
                 <span className="material-symbols-outlined text-sm">restaurant</span>
@@ -205,7 +194,7 @@ export default function RoomDetailPage() {
 
             <button
               onClick={() => setBookingOpen(true)}
-              className="w-full bg-botanical text-secondary py-3 rounded-lg font-bold hover:bg-primary transition-all mb-3"
+              className="w-full bg-botanical text-secondary py-3 rounded-lg font-bold hover:bg-botanical-soft transition-all mb-3"
             >
               Book Now
             </button>

@@ -1,4 +1,5 @@
 import Hero from './components/Hero'
+import Approach from './components/Approach'
 import About from './components/About'
 import Rooms from './components/Rooms'
 import Events from './components/Events'
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="bg-background-light text-slate-800 min-h-screen pb-20 md:pb-0">
       <Hero />
+      <Approach />
       <About />
       <Rooms />
       <Events />

@@ -4,14 +4,6 @@ import api from '../lib/api'
 import BookingModal from './BookingModal'
 
 // Map room type → tag label & colour (display-only)
-const TAG_MAP = {
-  standard: { tag: 'Value',   tagColor: 'bg-cream text-primary' },
-  double:   { tag: 'Value',   tagColor: 'bg-cream text-primary' },
-  premier:  { tag: 'Popular', tagColor: 'bg-gold text-white' },
-  executive:{ tag: 'Executive', tagColor: 'bg-gold text-white' },
-  cottage:  { tag: 'Private', tagColor: 'bg-secondary text-primary' },
-  deluxe:   { tag: 'Deluxe',  tagColor: 'bg-gold text-white' },
-}
 
 // Map common amenity strings to Material Symbols icons
 const AMENITY_ICON_MAP = {
@@ -46,14 +38,16 @@ const FALLBACK_ROOMS = [
     description: 'Comfortable room with double bed, perfect for couples or solo travelers.',
     price_per_night: 5500,
     amenities: ['Double Bed', 'En-suite', 'Breakfast'],
+    images: ['/images/double-room/IMG_4935.JPG', '/images/double-room/IMG_4936.JPG'],
   },
   {
     id: null,
-    name: 'Premier Room',
-    type: 'premier',
+    name: 'Executive Room 1',
+    type: 'executive',
     description: 'Spacious premier room with enhanced amenities and beautiful garden views.',
     price_per_night: 6500,
     amenities: ['King Bed', 'En-suite', 'Breakfast'],
+    images: ['/images/Master bedroom/IMG_4922.JPG', '/images/Master bedroom/IMG_4923.JPG'],
   },
   {
     id: null,
@@ -62,6 +56,7 @@ const FALLBACK_ROOMS = [
     description: 'Secluded standalone cottage surrounded by our beautiful gardens.',
     price_per_night: 6500,
     amenities: ['Standalone', 'En-suite', 'Breakfast'],
+    images: ['/images/cottage/IMG_4948.JPG', '/images/cottage/IMG_4949.JPG'],
   },
 ]
 
@@ -125,7 +120,7 @@ const Rooms = () => {
           </div>
           <Link
             to="/rooms"
-            className="mt-4 md:mt-0 inline-flex items-center gap-2 bg-[#efe6cd] text-botanical border border-heritage-gold-soft px-5 py-2.5 rounded-lg font-semibold hover:bg-[#e6d8b2] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+            className="mt-4 md:mt-0 inline-flex items-center gap-2 bg-cream-light text-botanical border border-heritage-gold-soft px-5 py-2.5 rounded-lg font-semibold hover:bg-heritage-gold-soft/50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
           >
             View All Rooms
             <span className="material-symbols-outlined">arrow_forward</span>
@@ -135,16 +130,16 @@ const Rooms = () => {
         {/* Room Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {rooms.map((room, index) => {
-            const { tag, tagColor } = TAG_MAP[room.type] || { tag: 'Room', tagColor: 'bg-cream text-primary' }
             const amenities = Array.isArray(room.amenities) ? room.amenities : []
 
             return (
               <div key={room.id ?? index} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:-translate-y-2 transition-all duration-300">
-                <div className="h-52 bg-linear-to-br from-primary-light to-primary flex items-center justify-center relative">
-                  <span className="text-accent/60 text-sm">Room photo coming soon</span>
-                  <span className={`absolute top-4 left-4 ${tagColor} px-3 py-1 rounded-full text-xs font-semibold`}>
-                    {tag}
-                  </span>
+                <div className="h-52 bg-linear-to-br from-botanical-soft to-botanical flex items-center justify-center relative overflow-hidden">
+                  {room.images && room.images.length > 0 ? (
+                    <img src={room.images[0]} alt={room.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-accent/60 text-sm">Room photo coming soon</span>
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="font-display text-xl font-medium text-secondary mb-2">{room.name}</h3>
@@ -168,7 +163,7 @@ const Rooms = () => {
                       type="button"
                       aria-label={`Book ${room.name}`}
                       onClick={() => openRoomBooking(room)}
-                      className="px-5 py-2 bg-botanical text-secondary rounded-lg text-sm font-semibold hover:bg-primary transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                      className="px-5 py-2 bg-cream-light text-botanical rounded-lg text-sm font-semibold hover:bg-heritage-gold-soft transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book
                     </button>
@@ -179,11 +174,11 @@ const Rooms = () => {
           })}
 
           {/* Home Away From Home — full-width package card */}
-          <div className="md:col-span-2 lg:col-span-3 rounded-2xl overflow-hidden border border-gold/30 bg-linear-to-r from-secondary/10 to-accent/20">
+          <div className="md:col-span-2 lg:col-span-3 rounded-2xl overflow-hidden border border-heritage-gold/30 bg-linear-to-r from-secondary/10 to-accent/20">
             <div className="p-8 md:p-10">
               {/* Badges */}
               <div className="flex flex-wrap items-center gap-3 mb-5">
-                <span className="bg-gold text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                <span className="bg-heritage-gold text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
                   Best Value
                 </span>
                 {pkg.savings > 0 && (
@@ -246,7 +241,7 @@ const Rooms = () => {
                     <button
                       type="button"
                       onClick={openPackageBooking}
-                      className="inline-block bg-botanical text-secondary px-8 py-3 rounded-lg font-bold hover:bg-primary transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+                      className="inline-block bg-cream-light text-botanical px-8 py-3 rounded-lg font-bold hover:bg-heritage-gold-soft transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
                     >
                       Book Entire Property
                     </button>

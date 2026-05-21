@@ -25,8 +25,8 @@ const Gardens = () => {
           {/* Large image */}
           <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/full_garden_pic.webp" 
-              alt="Colorful flower beds" 
+              src="/images/IMG_4901.JPG" 
+              alt="Lush green botanical gardens" 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
@@ -34,29 +34,29 @@ const Gardens = () => {
           {/* Smaller images */}
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/front_right_garden.webp" 
-              alt="Garden landscaping" 
+              src="/images/IMG_4902.JPG" 
+              alt="Front garden landscaping" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/balcony_pathway.webp" 
+              src="/images/balc-pathway-sub.JPG" 
               alt="Stone pathway" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/right-side_garden_from_bottom.webp" 
+              src="/images/front/IMG_4866.JPG" 
               alt="Manicured lawns" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg group">
             <img 
-              src="/images/golden_hour_garden.jpeg" 
-              alt="Garden grounds" 
+              src="/images/IMG_4903.JPG" 
+              alt="Gardens at sunset" 
               className="w-full h-full object-cover aspect-square group-hover:scale-105 transition-transform duration-500"
             />
           </div>

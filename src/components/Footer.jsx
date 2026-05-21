@@ -9,7 +9,7 @@ const Footer = () => {
             <img 
               src="/images/wima-logo.jpeg" 
               alt="Wima Serenity Gardens" 
-              className="h-20 w-auto mb-4 brightness-0 invert opacity-90"
+              className="h-20 w-auto mb-4 object-contain invert mix-blend-screen opacity-90"
             />
             <p className="text-heritage-gold-soft/90 text-sm leading-relaxed">
               Your serene escape in Kenya's tea country. Guest house, leisure gardens, and event venue.
@@ -25,7 +25,7 @@ const Footer = () => {
               <li><a href="#events" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Events</a></li>
               <li><a href="#contact" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">Contact</a></li>
             </ul>
-          </div>
+          </div> 
 
           {/* Room Types */}
           <div>

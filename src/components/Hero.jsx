@@ -14,17 +14,17 @@ const Hero = () => {
           </p>
 
           <div className="inline-flex items-center space-x-2 bg-botanical/10 px-4 py-1.5 rounded-full border border-botanical/20">
-            <span className="material-symbols-outlined text-primary text-base">
+            <span className="material-symbols-outlined text-botanical text-base">
               location_on
             </span>
-            <span className="text-primary font-semibold text-xs tracking-widest uppercase">
+            <span className="text-botanical font-semibold text-xs tracking-widest uppercase">
               Kericho, Kenya
             </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-display leading-[1.08] text-botanical">
             Find Your Peace at <br />
-            <span className="text-primary">WIMA Serenity Gardens</span>
+            <span className="text-botanical">WIMA Serenity Gardens</span>
           </h1>
 
           <p className="text-lg text-slate-700 max-w-xl leading-relaxed">
@@ -86,7 +86,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="absolute w-[65%] h-[45%] bottom-0 right-0 overflow-hidden rounded-3xl hero-grid-image border-8 border-[#f5efe0] z-10 translate-x-2 lg:translate-x-8">
+          <div className="absolute w-[65%] h-[45%] bottom-0 right-0 overflow-hidden rounded-3xl hero-grid-image border-8 border-cream-light z-10 translate-x-2 lg:translate-x-8">
             <img
               alt="Aerial view showing event tents and scale"
               className="w-full h-full object-cover"
@@ -95,8 +95,8 @@ const Hero = () => {
             <div className="absolute inset-0 bg-heritage-gold/25 hover:bg-transparent transition-all duration-500"></div>
           </div>
 
-          <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute -top-10 -right-10 w-32 h-32 bg-botanical/5 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-botanical/5 rounded-full blur-3xl"></div>
         </div>
       </div>
     </main>

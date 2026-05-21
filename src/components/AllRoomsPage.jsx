@@ -13,7 +13,11 @@ const FALLBACK_ROOMS = [
     capacity: 2,
     price_per_night: 5000,
     amenities: ['Double bed', 'En-suite bathroom', 'Hot shower', 'WiFi', 'Garden view'],
-    images: [],
+    images: [
+      '/images/michelle-room/IMG_4973.JPG',
+      '/images/michelle-room/IMG_4974.JPG',
+      '/images/michelle-room/IMG_4975.JPG'
+    ],
   },
   {
     id: 'fallback-deluxe-2',
@@ -46,7 +50,12 @@ const FALLBACK_ROOMS = [
     capacity: 2,
     price_per_night: 6000,
     amenities: ['Large double bed', 'En-suite bathroom', 'Hot shower', 'WiFi', 'Large wardrobe'],
-    images: [],
+    images: [
+      '/images/double-room/IMG_4935.JPG',
+      '/images/double-room/IMG_4936.JPG',
+      '/images/double-room/IMG_4937.JPG',
+      '/images/double-room/IMG_4938.JPG'
+    ],
   },
   {
     id: 'fallback-executive-1',
@@ -57,7 +66,12 @@ const FALLBACK_ROOMS = [
     capacity: 2,
     price_per_night: 6000,
     amenities: ['King-size bed', 'Premium bedding', 'WiFi', 'TV with DSTV', 'Private balcony'],
-    images: [],
+    images: [
+      '/images/Master bedroom/IMG_4922.JPG',
+      '/images/Master bedroom/IMG_4923.JPG',
+      '/images/Master bedroom/IMG_4924.JPG',
+      '/images/Master bedroom/IMG_4925.JPG'
+    ],
   },
   {
     id: 'fallback-executive-2',
@@ -68,7 +82,12 @@ const FALLBACK_ROOMS = [
     capacity: 2,
     price_per_night: 6000,
     amenities: ['King-size bed', 'WiFi', 'TV with DSTV', 'Private balcony', 'Executive work desk'],
-    images: [],
+    images: [
+      '/images/andrew-room/IMG_4982.JPG',
+      '/images/andrew-room/IMG_4983.JPG',
+      '/images/andrew-room/IMG_4984.JPG',
+      '/images/andrew-room/IMG_4985.JPG'
+    ],
   },
   {
     id: 'fallback-cottage',
@@ -79,7 +98,12 @@ const FALLBACK_ROOMS = [
     capacity: 3,
     price_per_night: 7000,
     amenities: ['Queen-size bed', 'Separate living area', 'Kitchenette', 'Mini fridge', 'Private patio'],
-    images: [],
+    images: [
+      '/images/cottage/IMG_4948.JPG',
+      '/images/cottage/IMG_4949.JPG',
+      '/images/cottage/IMG_4950.JPG',
+      '/images/cottage/IMG_4951.JPG'
+    ],
   },
 ]
 
@@ -105,7 +129,7 @@ const AllRoomsPage = () => {
     : rooms.filter(r => r.type === activeType)
 
   return (
-    <main className="min-h-screen bg-[#f8f3e7] text-slate-800 py-14 md:py-20">
+    <main className="min-h-screen bg-cream-bg text-slate-800 py-14 md:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header row */}
@@ -159,7 +183,7 @@ const AllRoomsPage = () => {
 
                 {/* Image — links to detail page if slug exists */}
                 {hasSlug ? (
-                  <Link to={`/rooms/${room.slug}`} className="block h-52 bg-linear-to-br from-primary-light to-primary/90 overflow-hidden flex-shrink-0">
+                  <Link to={`/rooms/${room.slug}`} className="block h-52 bg-linear-to-br from-botanical-soft to-botanical overflow-hidden flex-shrink-0">
                     {room.images?.[0] ? (
                       <img src={room.images[0]} alt={room.name} className="w-full h-full object-cover" />
                     ) : (
@@ -169,7 +193,7 @@ const AllRoomsPage = () => {
                     )}
                   </Link>
                 ) : (
-                  <div className="h-52 bg-linear-to-br from-primary-light to-primary/90 flex items-center justify-center flex-shrink-0">
+                  <div className="h-52 bg-linear-to-br from-botanical-soft to-botanical flex items-center justify-center flex-shrink-0">
                     <span className="text-secondary/80 text-sm">Room photo coming soon</span>
                   </div>
                 )}
@@ -184,7 +208,7 @@ const AllRoomsPage = () => {
                     ) : (
                       <h2 className="font-display text-2xl text-botanical leading-tight">{room.name}</h2>
                     )}
-                    <span className="text-xs uppercase tracking-widest bg-[#f2ecda] text-botanical px-3 py-1 rounded-full flex-shrink-0 mt-1">
+                    <span className="text-xs uppercase tracking-widest bg-cream-light text-botanical px-3 py-1 rounded-full flex-shrink-0 mt-1 shadow-sm">
                       {room.type}
                     </span>
                   </div>
@@ -198,7 +222,7 @@ const AllRoomsPage = () => {
                   {Array.isArray(room.amenities) && room.amenities.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-5">
                       {room.amenities.slice(0, 4).map((amenity, i) => (
-                        <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-[#f7f1e4] text-slate-700 border border-heritage-gold-soft/40">
+                        <span key={i} className="text-xs px-2.5 py-1 rounded-full bg-cream-light text-slate-700 border border-heritage-gold-soft/40">
                           {amenity}
                         </span>
                       ))}
@@ -215,12 +239,12 @@ const AllRoomsPage = () => {
                       <button
                         type="button"
                         onClick={() => setBookingTarget(room)}
-                        className="px-4 py-2 rounded-lg bg-botanical text-white text-sm font-semibold hover:bg-primary transition-all"
+                        className="px-4 py-2 rounded-lg bg-botanical text-secondary text-sm font-semibold hover:bg-botanical-soft transition-all"
                       >
                         Inquire
                       </button>
                     ) : (
-                      <a href="/#contact" className="px-4 py-2 rounded-lg bg-botanical text-white text-sm font-semibold hover:bg-primary transition-all">
+                      <a href="/#contact" className="px-4 py-2 rounded-lg bg-botanical text-secondary text-sm font-semibold hover:bg-botanical-soft transition-all">
                         Inquire
                       </a>
                     )}

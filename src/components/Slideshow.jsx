@@ -2,13 +2,18 @@ import { useState, useEffect, useCallback } from 'react'
 
 const SLIDES = [
   { src: '/images/large_aerial_view.PNG',              alt: 'Aerial view of Wima Serenity Gardens' },
-  { src: '/images/house_picture_from_garden.png',      alt: 'Main house viewed from the gardens' },
-  { src: '/images/full_garden_pic.webp',               alt: 'Lush flower gardens in full bloom' },
-  { src: '/images/golden_hour_garden.jpeg',            alt: 'Gardens bathed in golden hour light' },
-  { src: '/images/balcony_pathway.webp',               alt: 'Pathway winding through the grounds' },
-  { src: '/images/front_right_garden.webp',            alt: 'Front garden landscaping' },
-  { src: '/images/right-side_garden_from_bottom.webp', alt: 'Side garden and manicured lawns' },
-  { src: '/images/house_pic_from_out_with_table.jpeg', alt: 'Outdoor dining on the grounds' },
+  { src: '/images/IMG_4904.JPG',                       alt: 'Lush flower gardens in full bloom' },
+  { src: '/images/IMG_4905.JPG',                       alt: 'Gardens bathed in beautiful light' },
+  { src: '/images/balc-pathway-sub.JPG',               alt: 'Pathway winding through the grounds' },
+  { src: '/images/IMG_4906.JPG',                       alt: 'Front garden landscaping' },
+  { src: '/images/front/IMG_4866.JPG',                 alt: 'Side garden and manicured lawns' },
+  { src: '/images/views-from-patio/IMG_4854.JPG',      alt: 'Beautiful views from the patio' },
+  { src: '/images/views-from-patio/IMG_4862.JPG',      alt: 'Gardens stretching towards the horizon' },
+  { src: '/images/IMG_4907.JPG',                       alt: 'Outdoor relaxation areas' },
+  { src: '/images/IMG_4908.JPG',                       alt: 'Manicured gardens' },
+  { src: '/images/IMG_4909.JPG',                       alt: 'Beautiful property grounds' },
+  { src: '/images/IMG_4910.JPG',                       alt: 'Serene outdoor spaces' },
+  { src: '/images/IMG_4911.JPG',                       alt: 'Perfect event lawns' }
 ]
 
 // Wrap first/last slides as clones to enable seamless infinite looping.
@@ -99,11 +104,6 @@ const Slideshow = () => {
                 <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
               </div>
             ))}
-          </div>
-
-          {/* Caption */}
-          <div className="absolute bottom-0 inset-x-0 bg-linear-to-t from-primary/60 to-transparent px-6 py-5 pointer-events-none">
-            <p className="text-secondary/90 text-sm font-medium">{SLIDES[realIndex].alt}</p>
           </div>
 
           {/* Prev / Next */}

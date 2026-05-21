@@ -82,13 +82,13 @@ const Nearby = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {attractions.map((attr, i) => (
             <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-heritage-gold-soft/40 flex gap-4 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#f2ecda] flex items-center justify-center">
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cream-light flex items-center justify-center">
                 <span className="material-symbols-outlined text-botanical text-2xl">{attr.icon}</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <p className="font-semibold text-botanical">{attr.name}</p>
-                  <span className="text-xs bg-[#efe6cd] text-botanical px-2 py-0.5 rounded-full font-medium">{attr.distance}</span>
+                  <span className="text-xs bg-cream-light text-botanical px-2 py-0.5 rounded-full font-medium">{attr.distance}</span>
                 </div>
                 <p className="text-sm text-slate-600 leading-relaxed">{attr.description}</p>
               </div>
@@ -105,7 +105,7 @@ const Nearby = () => {
           </p>
           <a
             href="#contact"
-            className="inline-block bg-[#f2ecda] text-botanical px-6 py-3 rounded-full font-bold hover:bg-heritage-gold-soft transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
+            className="inline-block bg-cream-light text-botanical px-6 py-3 rounded-full font-bold hover:bg-heritage-gold-soft transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft"
           >
             Get in Touch
           </a>
