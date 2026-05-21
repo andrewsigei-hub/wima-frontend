@@ -6,9 +6,7 @@ export default function Approach() {
   // Ensure video plays automatically on low power modes if possible
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play().catch((error) => {
-        console.log("Video auto-play was prevented:", error)
-      })
+      videoRef.current.play().catch(() => {})
     }
   }, [])
 

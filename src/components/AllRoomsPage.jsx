@@ -154,7 +154,7 @@ const AllRoomsPage = () => {
             <button
               key={type}
               onClick={() => setActiveType(type)}
-              className={`flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium capitalize transition-all ${
+              className={`shrink-0 px-4 py-1.5 rounded-full text-sm font-medium capitalize transition-all ${
                 activeType === type
                   ? 'bg-botanical text-secondary'
                   : 'border border-botanical/30 text-botanical hover:bg-botanical/5'
@@ -183,7 +183,7 @@ const AllRoomsPage = () => {
 
                 {/* Image — links to detail page if slug exists */}
                 {hasSlug ? (
-                  <Link to={`/rooms/${room.slug}`} className="block h-52 bg-linear-to-br from-botanical-soft to-botanical overflow-hidden flex-shrink-0">
+                  <Link to={`/rooms/${room.slug}`} className="block h-52 bg-linear-to-br from-botanical-soft to-botanical overflow-hidden shrink-0">
                     {room.images?.[0] ? (
                       <img src={room.images[0]} alt={room.name} className="w-full h-full object-cover" />
                     ) : (
@@ -193,7 +193,7 @@ const AllRoomsPage = () => {
                     )}
                   </Link>
                 ) : (
-                  <div className="h-52 bg-linear-to-br from-botanical-soft to-botanical flex items-center justify-center flex-shrink-0">
+                  <div className="h-52 bg-linear-to-br from-botanical-soft to-botanical flex items-center justify-center shrink-0">
                     <span className="text-secondary/80 text-sm">Room photo coming soon</span>
                   </div>
                 )}
@@ -208,7 +208,7 @@ const AllRoomsPage = () => {
                     ) : (
                       <h2 className="font-display text-2xl text-botanical leading-tight">{room.name}</h2>
                     )}
-                    <span className="text-xs uppercase tracking-widest bg-cream-light text-botanical px-3 py-1 rounded-full flex-shrink-0 mt-1 shadow-sm">
+                    <span className="text-xs uppercase tracking-widest bg-cream-light text-botanical px-3 py-1 rounded-full shrink-0 mt-1 shadow-sm">
                       {room.type}
                     </span>
                   </div>

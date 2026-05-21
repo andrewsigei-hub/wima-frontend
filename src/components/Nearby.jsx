@@ -82,7 +82,7 @@ const Nearby = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {attractions.map((attr, i) => (
             <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-heritage-gold-soft/40 flex gap-4 items-start">
-              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-cream-light flex items-center justify-center">
+              <div className="shrink-0 w-12 h-12 rounded-xl bg-cream-light flex items-center justify-center">
                 <span className="material-symbols-outlined text-botanical text-2xl">{attr.icon}</span>
               </div>
               <div>

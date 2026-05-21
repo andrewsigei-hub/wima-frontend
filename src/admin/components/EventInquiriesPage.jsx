@@ -5,29 +5,17 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import adminApi from '../lib/adminApi'
+import {
+  fmt, fmtDate, STATUS_TABS, StatusBadge,
+  Th, IconBtn, PagBtn, ActionBtn,
+} from './adminShared'
 
-const STATUS_TABS = ['all', 'new', 'read', 'replied', 'archived']
 const EVENT_TYPES = ['all', 'wedding', 'corporate', 'birthday', 'reunion', 'graduation', 'other']
 const LIMIT = 20
-
-const STATUS_BADGE = {
-  new:      'bg-blue-50 text-blue-700 border-blue-200',
-  read:     'bg-slate-100 text-slate-600 border-slate-200',
-  replied:  'bg-green-50 text-green-700 border-green-200',
-  archived: 'bg-slate-50 text-slate-400 border-slate-200',
-}
 
 const VENUE_LABELS = {
   field_1: 'Main Event Field',
   field_2: 'Garden Terrace',
-}
-
-function StatusBadge({ status }) {
-  return (
-    <span className={`text-xs font-medium border rounded-full px-2.5 py-0.5 capitalize ${STATUS_BADGE[status] || 'bg-gray-100 text-gray-600'}`}>
-      {status}
-    </span>
-  )
 }
 
 function DetailPanel({ inquiry, onClose, onAction }) {
@@ -118,38 +106,6 @@ function Field({ label, value }) {
   )
 }
 
-function ActionBtn({ icon, label, loading, onClick, variant }) {
-  const base = 'flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-all disabled:opacity-60 disabled:cursor-not-allowed'
-  const variants = {
-    primary: 'bg-primary text-secondary hover:bg-primary-dark',
-    secondary: 'border border-botanical/40 text-primary hover:bg-botanical/5',
-    danger: 'border border-red-200 text-red-600 hover:bg-red-50',
-  }
-  return (
-    <button onClick={onClick} disabled={loading} className={`${base} ${variants[variant]}`}>
-      {loading ? (
-        <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
-        </svg>
-      ) : icon}
-      {label}
-    </button>
-  )
-}
-
-function fmt(dateStr) {
-  if (!dateStr) return '—'
-  return new Date(dateStr).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })
-}
-
-function fmtDate(dateStr) {
-  if (!dateStr) return '—'
-  return new Date(dateStr).toLocaleString('en-KE', {
-    day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
-  })
-}
-
 export default function EventInquiriesPage() {
   const { token } = useAuth()
 
@@ -185,19 +141,15 @@ export default function EventInquiriesPage() {
 
   const handleAction = async (id, actionType) => {
     try {
-      const statusMap = { 'mark-read': 'read', 'mark-replied': 'replied', 'archive': 'archived' }
+      const statusMap = { 'mark-read': 'read', 'mark-replied': 'replied', archive: 'archived' }
       await adminApi.patch(`/admin/event-inquiries/${id}`, { status: statusMap[actionType] }, token)
       await fetchInquiries()
       setSelected((prev) => {
         if (!prev || prev.id !== id) return prev
-        const updated = { ...prev }
-        if (actionType === 'mark-read') updated.status = 'read'
-        else if (actionType === 'mark-replied') updated.status = 'replied'
-        else if (actionType === 'archive') updated.status = 'archived'
-        return updated
+        return { ...prev, status: statusMap[actionType] ?? prev.status }
       })
-    } catch (err) {
-      console.error(err)
+    } catch {
+      // silently ignore — table will stay in current state
     }
   }
 
@@ -242,7 +194,7 @@ export default function EventInquiriesPage() {
 
       {error && (
         <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-5 py-4 text-red-700 text-sm mb-5">
-          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+          <AlertCircle className="w-5 h-5 shrink-0" />
           {error}
         </div>
       )}
@@ -326,16 +278,10 @@ export default function EventInquiriesPage() {
               Page {currentPage} of {totalPages} &bull; {total} total
             </p>
             <div className="flex gap-2">
-              <PagBtn
-                onClick={() => setOffset((o) => Math.max(0, o - LIMIT))}
-                disabled={offset === 0}
-              >
+              <PagBtn onClick={() => setOffset((o) => Math.max(0, o - LIMIT))} disabled={offset === 0}>
                 <ChevronLeft className="w-4 h-4" /> Prev
               </PagBtn>
-              <PagBtn
-                onClick={() => setOffset((o) => o + LIMIT)}
-                disabled={offset + LIMIT >= total}
-              >
+              <PagBtn onClick={() => setOffset((o) => o + LIMIT)} disabled={offset + LIMIT >= total}>
                 Next <ChevronRight className="w-4 h-4" />
               </PagBtn>
             </div>
@@ -351,37 +297,5 @@ export default function EventInquiriesPage() {
         />
       )}
     </div>
-  )
-}
-
-function Th({ children }) {
-  return (
-    <th className="px-4 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wide">
-      {children}
-    </th>
-  )
-}
-
-function IconBtn({ children, onClick, title }) {
-  return (
-    <button
-      onClick={onClick}
-      title={title}
-      className="p-1.5 rounded-lg text-slate-400 hover:text-primary hover:bg-botanical/5 transition-all"
-    >
-      {children}
-    </button>
-  )
-}
-
-function PagBtn({ children, onClick, disabled }) {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm border border-heritage-gold-soft/60 text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-    >
-      {children}
-    </button>
   )
 }

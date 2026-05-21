@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 import api from '../lib/api'
 import BookingModal from './BookingModal'
 
-// Map room type → tag label & colour (display-only)
-
 // Map common amenity strings to Material Symbols icons
 const AMENITY_ICON_MAP = {
   'Double Bed':    'bed',
@@ -197,7 +195,7 @@ const Rooms = () => {
                   <p className="font-script text-2xl text-accent mb-5">{pkg.tagline}</p>
 
                   <p className="text-sm text-secondary/70 mb-6 leading-relaxed">
-                    {pkg.short_description || pkg.long_description}
+                    {pkg.short_description}
                   </p>
 
                   <p className="text-xs text-accent/80 uppercase tracking-widest font-semibold mb-3">What&apos;s included</p>

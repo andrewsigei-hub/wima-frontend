@@ -43,13 +43,7 @@ export default function RoomDetailPage() {
     setNotFound(false)
     api.get(`/rooms/${slug}`)
       .then(data => setRoom(data.room))
-      .catch(err => {
-        if (err.message?.includes('404') || err.message?.toLowerCase().includes('not found')) {
-          setNotFound(true)
-        } else {
-          setNotFound(true) // treat any fetch error as not found on detail page
-        }
-      })
+      .catch(() => setNotFound(true))
       .finally(() => setLoading(false))
   }, [slug])
 
@@ -128,7 +122,7 @@ export default function RoomDetailPage() {
               key={i}
               src={url}
               alt={`${room.name} ${i + 2}`}
-              className="h-16 w-24 object-cover rounded-lg flex-shrink-0 border border-heritage-gold-soft/40"
+              className="h-16 w-24 object-cover rounded-lg shrink-0 border border-heritage-gold-soft/40"
             />
           ))}
         </div>
@@ -164,7 +158,7 @@ export default function RoomDetailPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {amenities.map((amenity, i) => (
                   <div key={i} className="flex items-center gap-2 bg-white rounded-lg border border-heritage-gold-soft/40 px-3 py-2.5 text-sm text-slate-700">
-                    <span className="material-symbols-outlined text-botanical text-base flex-shrink-0">
+                    <span className="material-symbols-outlined text-botanical text-base shrink-0">
                       {amenityIcon(amenity)}
                     </span>
                     {amenity}

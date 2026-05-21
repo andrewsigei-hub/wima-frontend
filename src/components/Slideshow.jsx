@@ -99,7 +99,7 @@ const Slideshow = () => {
               <div
                 key={i}
                 style={{ width: `${100 / EXT.length}%` }}
-                className="flex-shrink-0 h-full"
+                className="shrink-0 h-full"
               >
                 <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
               </div>
@@ -144,7 +144,7 @@ const Slideshow = () => {
                 key={i}
                 onClick={() => goTo(i)}
                 aria-label={`Go to slide ${i + 1}`}
-                className={`flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft ${i === realIndex ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
+                className={`shrink-0 w-16 h-12 rounded-lg overflow-hidden transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-heritage-gold-soft ${i === realIndex ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-90'}`}
               >
                 <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" />
               </button>
