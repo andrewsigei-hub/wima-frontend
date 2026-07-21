@@ -12,7 +12,16 @@ async function request(path, token, options = {}) {
   }
 
   const response = await fetch(url, config)
-  const json = await response.json()
+
+  let json
+  try {
+    json = await response.json()
+  } catch {
+    if (response.status === 429) {
+      throw new Error('Too many requests — please wait a moment and try again.')
+    }
+    throw new Error(`Request failed: ${response.status}`)
+  }
 
   if (!response.ok) {
     throw new Error(json.error || `Request failed: ${response.status}`)

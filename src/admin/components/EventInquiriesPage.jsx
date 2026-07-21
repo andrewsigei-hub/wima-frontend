@@ -1,22 +1,21 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   ChevronLeft, ChevronRight, X, CheckCheck, MessageSquareDot,
-  Archive, AlertCircle, Eye,
+  Archive, ArchiveRestore, AlertCircle, Eye,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import adminApi from '../lib/adminApi'
 import {
-  fmt, fmtDate, STATUS_TABS, StatusBadge,
+  fmt, fmtDate, STATUS_TABS, StatusBadge, VENUE_LABELS,
   Th, IconBtn, PagBtn, ActionBtn,
 } from './adminShared'
 
 const EVENT_TYPES = ['all', 'wedding', 'corporate', 'birthday', 'reunion', 'graduation', 'other']
 const LIMIT = 20
 
-const VENUE_LABELS = {
-  field_1: 'Main Event Field',
-  field_2: 'Garden Terrace',
-}
+// Status an item is restored to when "unarchived" — no prior status is tracked,
+// so it lands back in the active inbox as "read" rather than re-flagged "new".
+const UNARCHIVE_STATUS = 'read'
 
 function DetailPanel({ inquiry, onClose, onAction }) {
   const [actioning, setActioning] = useState('')
@@ -82,7 +81,15 @@ function DetailPanel({ inquiry, onClose, onAction }) {
               variant="primary"
             />
           )}
-          {inquiry.status !== 'archived' && (
+          {inquiry.status === 'archived' ? (
+            <ActionBtn
+              icon={<ArchiveRestore className="w-4 h-4" />}
+              label="Unarchive"
+              loading={actioning === 'unarchive'}
+              onClick={() => action('unarchive')}
+              variant="secondary"
+            />
+          ) : (
             <ActionBtn
               icon={<Archive className="w-4 h-4" />}
               label="Archive"
@@ -141,7 +148,12 @@ export default function EventInquiriesPage() {
 
   const handleAction = async (id, actionType) => {
     try {
-      const statusMap = { 'mark-read': 'read', 'mark-replied': 'replied', archive: 'archived' }
+      const statusMap = {
+        'mark-read': 'read',
+        'mark-replied': 'replied',
+        archive: 'archived',
+        unarchive: UNARCHIVE_STATUS,
+      }
       await adminApi.patch(`/admin/event-inquiries/${id}`, { status: statusMap[actionType] }, token)
       await fetchInquiries()
       setSelected((prev) => {
@@ -258,7 +270,11 @@ export default function EventInquiriesPage() {
                             <CheckCheck className="w-4 h-4" />
                           </IconBtn>
                         )}
-                        {inq.status !== 'archived' && (
+                        {inq.status === 'archived' ? (
+                          <IconBtn title="Unarchive" onClick={() => handleAction(inq.id, 'unarchive')}>
+                            <ArchiveRestore className="w-4 h-4" />
+                          </IconBtn>
+                        ) : (
                           <IconBtn title="Archive" onClick={() => handleAction(inq.id, 'archive')}>
                             <Archive className="w-4 h-4" />
                           </IconBtn>

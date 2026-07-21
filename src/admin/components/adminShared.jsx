@@ -19,6 +19,11 @@ export function fmtDate(dateStr) {
 
 export const STATUS_TABS = ['all', 'new', 'read', 'replied', 'archived']
 
+export const VENUE_LABELS = {
+  field_1: 'Main Event Field',
+  field_2: 'Garden Terrace',
+}
+
 export const STATUS_BADGE = {
   new:      'bg-blue-50 text-blue-700 border-blue-200',
   read:     'bg-slate-100 text-slate-600 border-slate-200',

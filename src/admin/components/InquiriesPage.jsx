@@ -1,24 +1,29 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import {
   ChevronLeft, ChevronRight, X, CheckCheck, MessageSquareDot,
-  Archive, AlertCircle, Eye,
+  Archive, ArchiveRestore, AlertCircle, Eye,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import adminApi from '../lib/adminApi'
 import {
-  fmt, fmtDate, STATUS_TABS, StatusBadge,
+  fmt, fmtDate, STATUS_TABS, StatusBadge, VENUE_LABELS,
   Th, IconBtn, PagBtn, ActionBtn,
 } from './adminShared'
 
-const TYPE_OPTIONS = ['all', 'booking', 'general']
+const TYPE_OPTIONS = ['all', 'booking', 'general', 'event']
 const LIMIT = 20
+
+// Status an item is restored to when "unarchived" — no prior status is tracked,
+// so it lands back in the active inbox as "read" rather than re-flagged "new".
+const UNARCHIVE_STATUS = 'read'
 
 function DetailPanel({ inquiry, onClose, onAction }) {
   const [actioning, setActioning] = useState('')
+  const isEvent = inquiry._source === 'event'
 
   const action = async (type) => {
     setActioning(type)
-    await onAction(inquiry.id, type)
+    await onAction(inquiry, type)
     setActioning('')
   }
 
@@ -27,7 +32,7 @@ function DetailPanel({ inquiry, onClose, onAction }) {
       <div className="absolute inset-0 bg-black/20" onClick={onClose} />
       <div className="relative w-full max-w-md bg-white shadow-2xl flex flex-col h-full overflow-y-auto">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100">
-          <h3 className="font-semibold text-slate-800">Inquiry Details</h3>
+          <h3 className="font-semibold text-slate-800">{isEvent ? 'Event Inquiry Details' : 'Inquiry Details'}</h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 transition-colors">
             <X className="w-5 h-5" />
           </button>
@@ -42,11 +47,25 @@ function DetailPanel({ inquiry, onClose, onAction }) {
           <Field label="Name" value={inquiry.name} />
           <Field label="Email" value={inquiry.email} />
           <Field label="Phone" value={inquiry.phone} />
-          <Field label="Type" value={inquiry.inquiry_type} />
-          {inquiry.room && <Field label="Room" value={inquiry.room.name} />}
-          {inquiry.check_in && <Field label="Check-in" value={fmt(inquiry.check_in)} />}
-          {inquiry.check_out && <Field label="Check-out" value={fmt(inquiry.check_out)} />}
-          {inquiry.guests && <Field label="Guests" value={inquiry.guests} />}
+          {isEvent ? (
+            <>
+              <Field label="Event Type" value={inquiry.event_type} />
+              <Field label="Event Date" value={fmt(inquiry.event_date)} />
+              <Field label="Guest Count" value={inquiry.guest_count ? `${inquiry.guest_count} guests` : '—'} />
+              <Field
+                label="Venue Preference"
+                value={inquiry.venue_preference ? VENUE_LABELS[inquiry.venue_preference] || inquiry.venue_preference : 'No preference'}
+              />
+            </>
+          ) : (
+            <>
+              <Field label="Type" value={inquiry.inquiry_type} />
+              {inquiry.room && <Field label="Room" value={inquiry.room.name} />}
+              {inquiry.check_in && <Field label="Check-in" value={fmt(inquiry.check_in)} />}
+              {inquiry.check_out && <Field label="Check-out" value={fmt(inquiry.check_out)} />}
+              {inquiry.guests && <Field label="Guests" value={inquiry.guests} />}
+            </>
+          )}
           <div>
             <p className="text-xs font-medium text-slate-400 uppercase tracking-wide mb-1">Message</p>
             <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap bg-slate-50 rounded-lg p-3">
@@ -75,7 +94,15 @@ function DetailPanel({ inquiry, onClose, onAction }) {
               variant="primary"
             />
           )}
-          {inquiry.status !== 'archived' && (
+          {inquiry.status === 'archived' ? (
+            <ActionBtn
+              icon={<ArchiveRestore className="w-4 h-4" />}
+              label="Unarchive"
+              loading={actioning === 'unarchive'}
+              onClick={() => action('unarchive')}
+              variant="secondary"
+            />
+          ) : (
             <ActionBtn
               icon={<Archive className="w-4 h-4" />}
               label="Archive"
@@ -102,8 +129,7 @@ function Field({ label, value }) {
 export default function InquiriesPage() {
   const { token } = useAuth()
 
-  const [inquiries, setInquiries] = useState([])
-  const [total, setTotal] = useState(0)
+  const [allInquiries, setAllInquiries] = useState([])
   const [offset, setOffset] = useState(0)
   const [statusFilter, setStatusFilter] = useState('all')
   const [typeFilter, setTypeFilter] = useState('all')
@@ -111,40 +137,62 @@ export default function InquiriesPage() {
   const [error, setError] = useState('')
   const [selected, setSelected] = useState(null)
 
+  // Room-booking/general inquiries and event inquiries live in separate tables —
+  // fetch both and merge so the inbox shows every submission in one place.
   const fetchInquiries = useCallback(async () => {
     setLoading(true)
     setError('')
-    const params = new URLSearchParams({ limit: LIMIT, offset })
-    if (statusFilter !== 'all') params.set('status', statusFilter)
-    if (typeFilter !== 'all') params.set('type', typeFilter)
 
     try {
-      const data = await adminApi.get(`/admin/inquiries?${params}`, token)
-      setInquiries(data.inquiries)
-      setTotal(data.total)
+      const [inqData, eventData] = await Promise.all([
+        adminApi.get('/admin/inquiries?limit=200', token),
+        adminApi.get('/admin/event-inquiries?limit=200', token),
+      ])
+
+      const tagged = [
+        ...inqData.inquiries.map((i) => ({ ...i, _source: 'inquiry', _type: i.inquiry_type })),
+        ...eventData.event_inquiries.map((e) => ({ ...e, _source: 'event', _type: 'event' })),
+      ]
+      tagged.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+
+      setAllInquiries(tagged)
     } catch (err) {
       setError(err.message || 'Failed to load inquiries')
     } finally {
       setLoading(false)
     }
-  }, [token, offset, statusFilter, typeFilter])
+  }, [token])
 
   useEffect(() => { fetchInquiries() }, [fetchInquiries])
   useEffect(() => { setOffset(0) }, [statusFilter, typeFilter])
 
-  const handleAction = async (id, actionType) => {
+  const filtered = useMemo(() => {
+    return allInquiries.filter((inq) => {
+      if (statusFilter !== 'all' && inq.status !== statusFilter) return false
+      if (typeFilter !== 'all' && inq._type !== typeFilter) return false
+      return true
+    })
+  }, [allInquiries, statusFilter, typeFilter])
+
+  const total = filtered.length
+  const pageItems = filtered.slice(offset, offset + LIMIT)
+
+  const handleAction = async (inquiry, actionType) => {
+    const statusMap = {
+      'mark-read': 'read',
+      'mark-replied': 'replied',
+      archive: 'archived',
+      unarchive: UNARCHIVE_STATUS,
+    }
+    const base = inquiry._source === 'event'
+      ? `/admin/event-inquiries/${inquiry.id}`
+      : `/admin/inquiries/${inquiry.id}`
+
     try {
-      if (actionType === 'mark-read') {
-        await adminApi.post(`/admin/inquiries/${id}/mark-read`, {}, token)
-      } else if (actionType === 'mark-replied') {
-        await adminApi.post(`/admin/inquiries/${id}/mark-replied`, {}, token)
-      } else if (actionType === 'archive') {
-        await adminApi.patch(`/admin/inquiries/${id}`, { status: 'archived' }, token)
-      }
+      await adminApi.patch(base, { status: statusMap[actionType] }, token)
       await fetchInquiries()
       setSelected((prev) => {
-        if (!prev || prev.id !== id) return prev
-        const statusMap = { 'mark-read': 'read', 'mark-replied': 'replied', archive: 'archived' }
+        if (!prev || prev.id !== inquiry.id || prev._source !== inquiry._source) return prev
         return { ...prev, status: statusMap[actionType] ?? prev.status }
       })
     } catch {
@@ -159,7 +207,7 @@ export default function InquiriesPage() {
     <div className="p-4 md:p-8">
       <div className="mb-6">
         <h1 className="font-display text-3xl font-bold text-primary">Inquiries</h1>
-        <p className="text-slate-500 mt-1 text-sm">Room bookings and general inquiries</p>
+        <p className="text-slate-500 mt-1 text-sm">Room bookings, general, and event inquiries</p>
       </div>
 
       {/* Filters */}
@@ -207,7 +255,7 @@ export default function InquiriesPage() {
             </svg>
             Loading inquiries…
           </div>
-        ) : inquiries.length === 0 ? (
+        ) : pageItems.length === 0 ? (
           <div className="px-6 py-12 text-center text-slate-400 text-sm">
             No inquiries found for this filter.
           </div>
@@ -219,25 +267,34 @@ export default function InquiriesPage() {
                   <Th>Name</Th>
                   <Th>Contact</Th>
                   <Th>Type</Th>
-                  <Th>Room / Dates</Th>
+                  <Th>Details</Th>
                   <Th>Status</Th>
                   <Th>Received</Th>
                   <Th></Th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
-                {inquiries.map((inq) => (
-                  <tr key={inq.id} className="hover:bg-slate-50/50 transition-colors">
+                {pageItems.map((inq) => (
+                  <tr key={`${inq._source}-${inq.id}`} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-4 py-3 font-medium text-slate-800 whitespace-nowrap">{inq.name}</td>
                     <td className="px-4 py-3">
                       <p className="text-slate-700 whitespace-nowrap">{inq.email}</p>
                       <p className="text-slate-400 text-xs whitespace-nowrap">{inq.phone}</p>
                     </td>
-                    <td className="px-4 py-3 capitalize text-slate-600 whitespace-nowrap">{inq.inquiry_type}</td>
+                    <td className="px-4 py-3 capitalize text-slate-600 whitespace-nowrap">{inq._type}</td>
                     <td className="px-4 py-3">
-                      {inq.room && <p className="text-slate-700 whitespace-nowrap">{inq.room.name}</p>}
-                      {inq.check_in && (
-                        <p className="text-slate-400 text-xs whitespace-nowrap">{fmt(inq.check_in)} → {fmt(inq.check_out)}</p>
+                      {inq._source === 'event' ? (
+                        <>
+                          <p className="text-slate-700 whitespace-nowrap capitalize">{inq.event_type}</p>
+                          <p className="text-slate-400 text-xs whitespace-nowrap">{fmt(inq.event_date)} &bull; {inq.guest_count} guests</p>
+                        </>
+                      ) : (
+                        <>
+                          {inq.room && <p className="text-slate-700 whitespace-nowrap">{inq.room.name}</p>}
+                          {inq.check_in && (
+                            <p className="text-slate-400 text-xs whitespace-nowrap">{fmt(inq.check_in)} → {fmt(inq.check_out)}</p>
+                          )}
+                        </>
                       )}
                     </td>
                     <td className="px-4 py-3"><StatusBadge status={inq.status} /></td>
@@ -248,17 +305,21 @@ export default function InquiriesPage() {
                           <MessageSquareDot className="w-4 h-4" />
                         </IconBtn>
                         {inq.status === 'new' && (
-                          <IconBtn title="Mark Read" onClick={() => handleAction(inq.id, 'mark-read')}>
+                          <IconBtn title="Mark Read" onClick={() => handleAction(inq, 'mark-read')}>
                             <Eye className="w-4 h-4" />
                           </IconBtn>
                         )}
                         {inq.status !== 'replied' && inq.status !== 'archived' && (
-                          <IconBtn title="Mark Replied" onClick={() => handleAction(inq.id, 'mark-replied')}>
+                          <IconBtn title="Mark Replied" onClick={() => handleAction(inq, 'mark-replied')}>
                             <CheckCheck className="w-4 h-4" />
                           </IconBtn>
                         )}
-                        {inq.status !== 'archived' && (
-                          <IconBtn title="Archive" onClick={() => handleAction(inq.id, 'archive')}>
+                        {inq.status === 'archived' ? (
+                          <IconBtn title="Unarchive" onClick={() => handleAction(inq, 'unarchive')}>
+                            <ArchiveRestore className="w-4 h-4" />
+                          </IconBtn>
+                        ) : (
+                          <IconBtn title="Archive" onClick={() => handleAction(inq, 'archive')}>
                             <Archive className="w-4 h-4" />
                           </IconBtn>
                         )}

@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 unused_images/
+
+# Large video files (exceed GitHub's 100MB limit; hosted separately)
+public/images/**/*.MOV
+public/images/**/*.mov
