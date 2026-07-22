@@ -97,7 +97,7 @@ const Nearby = () => {
         </div>
 
         {/* Callout */}
-        <div className="mt-12 bg-botanical rounded-2xl p-8 text-center text-secondary">
+        <div className="mt-12 bg-botanical rounded-2xl p-8 text-center text-secondary border border-heritage-gold-soft/40">
           <span className="material-symbols-outlined text-4xl mb-3 block">directions_car</span>
           <h4 className="font-display text-xl font-semibold mb-2">Need Help Planning a Day Trip?</h4>
           <p className="text-secondary/80 text-sm max-w-md mx-auto mb-5">

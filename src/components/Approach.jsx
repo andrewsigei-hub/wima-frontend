@@ -31,7 +31,7 @@ export default function Approach() {
             <video
               ref={videoRef}
               className="w-full h-full object-cover aspect-[4/5] sm:aspect-video lg:aspect-[4/5]"
-              src="/images/entry+approach/IMG_4890.MOV"
+              src="/images/entry+approach/IMG_4900.MOV"
               autoPlay
               loop
               muted

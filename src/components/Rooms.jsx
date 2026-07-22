@@ -131,7 +131,7 @@ const Rooms = () => {
             const amenities = Array.isArray(room.amenities) ? room.amenities : []
 
             return (
-              <div key={room.id ?? index} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 hover:-translate-y-2 transition-all duration-300">
+              <div key={room.id ?? index} className="bg-white/5 border border-heritage-gold-soft/30 rounded-2xl overflow-hidden hover:bg-white/10 hover:border-heritage-gold-soft/50 hover:-translate-y-2 transition-all duration-300">
                 <div className="h-52 bg-linear-to-br from-botanical-soft to-botanical flex items-center justify-center relative overflow-hidden">
                   {room.images && room.images.length > 0 ? (
                     <img src={room.images[0]} alt={room.name} className="w-full h-full object-cover" />
@@ -141,7 +141,7 @@ const Rooms = () => {
                 </div>
                 <div className="p-6">
                   <h3 className="font-display text-xl font-medium text-secondary mb-2">{room.name}</h3>
-                  <p className="text-sm text-slate-400 mb-4 leading-relaxed">{room.description}</p>
+                  <p className="text-sm text-heritage-gold-soft/70 mb-4 leading-relaxed">{room.description}</p>
                   <div className="flex flex-wrap gap-3 mb-5">
                     {amenities.slice(0, 3).map((amenity, i) => (
                       <span key={i} className="flex items-center gap-1 text-xs text-accent">
@@ -155,7 +155,7 @@ const Rooms = () => {
                       <span className="font-display text-2xl font-semibold text-secondary">
                         KSh {formatPrice(room.price_per_night)}
                       </span>
-                      <span className="text-xs text-slate-400">/night</span>
+                      <span className="text-xs text-heritage-gold-soft/60">/night</span>
                     </div>
                     <button
                       type="button"
