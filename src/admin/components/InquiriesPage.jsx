@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import {
   ChevronLeft, ChevronRight, X, CheckCheck, MessageSquareDot,
-  Archive, ArchiveRestore, AlertCircle, Eye,
+  Archive, ArchiveRestore, AlertCircle, Eye, EyeOff, Undo2,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import adminApi from '../lib/adminApi'
@@ -16,6 +16,9 @@ const LIMIT = 20
 // Status an item is restored to when "unarchived" — no prior status is tracked,
 // so it lands back in the active inbox as "read" rather than re-flagged "new".
 const UNARCHIVE_STATUS = 'read'
+
+// Same reasoning applies to undoing a reply — it steps back to "read", not "new".
+const UNDO_REPLY_STATUS = 'read'
 
 function DetailPanel({ inquiry, onClose, onAction }) {
   const [actioning, setActioning] = useState('')
@@ -76,7 +79,7 @@ function DetailPanel({ inquiry, onClose, onAction }) {
         </div>
 
         <div className="px-6 py-4 border-t border-slate-100 flex flex-col gap-2">
-          {inquiry.status === 'new' && (
+          {inquiry.status === 'new' ? (
             <ActionBtn
               icon={<Eye className="w-4 h-4" />}
               label="Mark as Read"
@@ -84,8 +87,24 @@ function DetailPanel({ inquiry, onClose, onAction }) {
               onClick={() => action('mark-read')}
               variant="secondary"
             />
-          )}
-          {inquiry.status !== 'replied' && inquiry.status !== 'archived' && (
+          ) : inquiry.status === 'read' ? (
+            <ActionBtn
+              icon={<EyeOff className="w-4 h-4" />}
+              label="Mark as Unread"
+              loading={actioning === 'mark-unread'}
+              onClick={() => action('mark-unread')}
+              variant="secondary"
+            />
+          ) : null}
+          {inquiry.status === 'replied' ? (
+            <ActionBtn
+              icon={<Undo2 className="w-4 h-4" />}
+              label="Undo Reply"
+              loading={actioning === 'undo-reply'}
+              onClick={() => action('undo-reply')}
+              variant="secondary"
+            />
+          ) : inquiry.status !== 'archived' ? (
             <ActionBtn
               icon={<CheckCheck className="w-4 h-4" />}
               label="Mark as Replied"
@@ -93,7 +112,7 @@ function DetailPanel({ inquiry, onClose, onAction }) {
               onClick={() => action('mark-replied')}
               variant="primary"
             />
-          )}
+          ) : null}
           {inquiry.status === 'archived' ? (
             <ActionBtn
               icon={<ArchiveRestore className="w-4 h-4" />}
@@ -180,7 +199,9 @@ export default function InquiriesPage() {
   const handleAction = async (inquiry, actionType) => {
     const statusMap = {
       'mark-read': 'read',
+      'mark-unread': 'new',
       'mark-replied': 'replied',
+      'undo-reply': UNDO_REPLY_STATUS,
       archive: 'archived',
       unarchive: UNARCHIVE_STATUS,
     }
@@ -304,16 +325,24 @@ export default function InquiriesPage() {
                         <IconBtn title="View" onClick={() => setSelected(inq)}>
                           <MessageSquareDot className="w-4 h-4" />
                         </IconBtn>
-                        {inq.status === 'new' && (
+                        {inq.status === 'new' ? (
                           <IconBtn title="Mark Read" onClick={() => handleAction(inq, 'mark-read')}>
                             <Eye className="w-4 h-4" />
                           </IconBtn>
-                        )}
-                        {inq.status !== 'replied' && inq.status !== 'archived' && (
+                        ) : inq.status === 'read' ? (
+                          <IconBtn title="Mark Unread" onClick={() => handleAction(inq, 'mark-unread')}>
+                            <EyeOff className="w-4 h-4" />
+                          </IconBtn>
+                        ) : null}
+                        {inq.status === 'replied' ? (
+                          <IconBtn title="Undo Reply" onClick={() => handleAction(inq, 'undo-reply')}>
+                            <Undo2 className="w-4 h-4" />
+                          </IconBtn>
+                        ) : inq.status !== 'archived' ? (
                           <IconBtn title="Mark Replied" onClick={() => handleAction(inq, 'mark-replied')}>
                             <CheckCheck className="w-4 h-4" />
                           </IconBtn>
-                        )}
+                        ) : null}
                         {inq.status === 'archived' ? (
                           <IconBtn title="Unarchive" onClick={() => handleAction(inq, 'unarchive')}>
                             <ArchiveRestore className="w-4 h-4" />
