@@ -1,5 +1,13 @@
 const BASE_URL = import.meta.env.VITE_API_URL
 
+let unauthorizedHandler = null
+
+// Registered by AuthProvider so a 401 (invalid/expired token) can trigger
+// logout + redirect from here, without this module depending on React context.
+export function setUnauthorizedHandler(handler) {
+  unauthorizedHandler = handler
+}
+
 async function request(path, token, options = {}) {
   const url = `${BASE_URL}/api${path}`
 
@@ -24,6 +32,12 @@ async function request(path, token, options = {}) {
   }
 
   if (!response.ok) {
+    // 401 means the token itself is missing/invalid/expired - the session is
+    // dead, so log out. 403 means a valid session lacks permission for this
+    // one action - surface it as a normal error instead of ending the session.
+    if (response.status === 401) {
+      unauthorizedHandler?.()
+    }
     throw new Error(json.error || `Request failed: ${response.status}`)
   }
 

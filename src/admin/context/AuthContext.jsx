@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { setUnauthorizedHandler } from '../lib/adminApi'
 
 const AuthContext = createContext(null)
 
@@ -30,6 +31,11 @@ export function AuthProvider({ children }) {
     setUser(null)
     navigate('/admin/login')
   }, [navigate])
+
+  useEffect(() => {
+    setUnauthorizedHandler(logout)
+    return () => setUnauthorizedHandler(null)
+  }, [logout])
 
   return (
     <AuthContext.Provider value={{ token, user, login, logout }}>
