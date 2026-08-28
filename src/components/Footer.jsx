@@ -43,7 +43,7 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
             <ul className="space-y-3">
               <li><a href="tel:+254700000000" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">+254 700 000 000</a></li>
-              <li><a href="mailto:info@wimaserenity.com" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">info@wimaserenity.com</a></li>
+              <li><a href="mailto:wimaserenitygardens@gmail.com" className="text-heritage-gold-soft/90 hover:text-secondary transition-colors text-sm">wimaserenitygardens@gmail.com</a></li>
               <li><span className="text-heritage-gold-soft/90 text-sm">Kericho, Kenya</span></li>
             </ul>
           </div>
